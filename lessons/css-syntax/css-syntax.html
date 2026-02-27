@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Syntax: Declarations, Blocks, Rulesets & Statements</title>
+
+    <style>
+      /* ========================================
+         GLOBAL STYLES
+         ========================================*/
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f6f6f6;
+        padding: 20px;
+      }
+
+      /* Main content container */
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      /* ========================================
+         HEADER / TITLE SECTION
+         ========================================*/
+      header {
+        background: #fff;
+        color: #111;
+        padding: 40px 20px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.1rem;
+        color: #444;
+      }
+
+      /* ========================================
+         ARTICLE / CONTENT SECTIONS
+         ========================================*/
+      article {
+        padding: 40px;
+      }
+
+      section {
+        margin-bottom: 50px;
+      }
+
+      section:last-child {
+        margin-bottom: 0;
+      }
+
+      section h2 {
+        font-size: 1.8rem;
+        color: #222;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      section p {
+        margin-bottom: 15px;
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      /* Emphasis on key terms */
+      .term {
+        background: #f0f0f0;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      /* ========================================
+         CODE BLOCKS & EXAMPLES
+         ========================================*/
+      .code-block {
+        background: #f7f7f7;
+        border-left: 4px solid #444;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .code-label {
+        font-size: 0.85rem;
+        color: #555;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      code {
+        color: #333;
+        font-family: "Courier New", monospace;
+      }
+
+      /* ========================================
+         VISUAL EXAMPLES / DEMO BOXES
+         ========================================*/
+      .demo-box {
+        background: #fafafa;
+        border: 2px dashed #bbb;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 6px;
+      }
+
+      .demo-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+
+      /* Example styled elements */
+      .example-text {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 4px;
+        background: white;
+        border: 1px solid #e0e0e0;
+      }
+
+      .example-1 {
+        color: #222;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .example-2 {
+        background: #f7f7f7;
+        border-left: 4px solid #999;
+      }
+
+      .example-3 {
+        background: #f7f7f7;
+        border-left: 4px solid #999;
+      }
+
+      /* ========================================
+         CALLOUTS / TIPS
+         ========================================*/
+      .callout {
+        background: #f7f7f7;
+        border-left: 4px solid #999;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+
+      .callout-label {
+        font-weight: 600;
+        color: #333;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      /* ========================================
+         FOOTER
+         ========================================*/
+      footer {
+        background: #f7f7f7;
+        padding: 20px;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      footer a {
+        color: #333;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <main>
+      <header>
+        <h1>Understanding CSS Syntax</h1>
+        <p>
+          Master declarations, blocks, rulesets & statements – the building
+          blocks of CSS
+        </p>
+      </header>
+
+      <!-- Main Content -->
+      <article>
+        <!-- Section 1: Introduction -->
+        <section>
+          <h2>What is CSS Syntax?</h2>
+          <p>
+            CSS (Cascading Style Sheets) is a language for describing how HTML
+            elements should look. To write CSS, you need to understand its basic
+            building blocks:
+          </p>
+          <ul style="margin: 15px 0 15px 20px; line-height: 1.8">
+            <li><strong>Declarations</strong> – single property-value pairs</li>
+            <li>
+              <strong>Declaration Blocks</strong> – groups of declarations
+            </li>
+            <li><strong>Rulesets</strong> – selectors + declaration blocks</li>
+            <li><strong>Statements</strong> – rulesets and at-rules</li>
+          </ul>
+          <p>
+            Think of CSS like giving instructions to a browser: "Here's what
+            element to target, and here's how to style it."
+          </p>
+        </section>
+
+        <!-- Section 2: CSS Declarations -->
+        <section>
+          <h2>CSS Declarations</h2>
+          <p>
+            A <span class="term">declaration</span> is the smallest meaningful
+            unit in CSS. It's a <strong>property</strong> and a
+            <strong>value</strong> separated by a colon (<code>:</code>).
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">Syntax:</span>
+            property: value;
+          </div>
+
+          <p><strong>Example declarations:</strong></p>
+          <div class="code-block">
+            color: blue;
+            <br />
+            font-size: 16px;
+            <br />
+            background: #fff;
+            <br />
+            margin: 10px;
+          </div>
+
+          <div class="demo-box">
+            <span class="demo-label">Live Example:</span>
+            <p class="example-text example-1">This text is blue and bold</p>
+          </div>
+
+          <div class="callout">
+            <div class="callout-label">💡 Key Point</div>
+            <p>
+              Notice the <strong>semicolon (;)</strong> at the end of each
+              declaration. This tells the browser "this declaration is
+              complete." Always end declarations with a semicolon!
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 3: CSS Declaration Blocks -->
+        <section>
+          <h2>CSS Declaration Blocks</h2>
+          <p>
+            A <span class="term">declaration block</span> is a group of
+            declarations wrapped in curly braces <code>{ }</code>. Declarations
+            inside are separated by semicolons.
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">Syntax:</span>
+            {
+            <br />
+            &nbsp;&nbsp;property1: value1;
+            <br />
+            &nbsp;&nbsp;property2: value2;
+            <br />
+            &nbsp;&nbsp;property3: value3;
+            <br />
+            }
+          </div>
+
+          <p><strong>Example declaration block:</strong></p>
+          <div class="code-block">
+            {
+            <br />
+            &nbsp;&nbsp;color: white;
+            <br />
+            &nbsp;&nbsp;background: navy;
+            <br />
+            &nbsp;&nbsp;padding: 20px;
+            <br />
+            &nbsp;&nbsp;border-radius: 5px;
+            <br />
+            }
+          </div>
+
+          <div class="demo-box">
+            <span class="demo-label">Live Example:</span>
+            <p
+              class="example-text example-2"
+              style="
+                color: white;
+                background: navy;
+                padding: 20px;
+                border-radius: 5px;
+              "
+            >
+              This box has multiple declarations applied together
+            </p>
+          </div>
+
+          <div class="callout">
+            <div class="callout-label">💡 Good Practice</div>
+            <p>
+              It's considered good style to end even the last declaration in a
+              block with a semicolon (e.g., <code>padding: 20px;</code> instead
+              of <code>padding: 20px</code>). This prevents mistakes when adding
+              new declarations later.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 4: CSS Rulesets -->
+        <section>
+          <h2>CSS Rulesets (Rules)</h2>
+          <p>
+            A <span class="term">ruleset</span> links a selector to a
+            declaration block. It tells the browser: "Apply these declarations
+            to elements matching this selector."
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">Syntax:</span>
+            selector {
+            <br />
+            &nbsp;&nbsp;property: value;
+            <br />
+            &nbsp;&nbsp;property: value;
+            <br />
+            }
+          </div>
+
+          <p><strong>Example rulesets:</strong></p>
+          <div class="code-block">
+            /* Target a class */
+            <br />
+            .button {
+            <br />
+            &nbsp;&nbsp;background: green;
+            <br />
+            &nbsp;&nbsp;color: white;
+            <br />
+            &nbsp;&nbsp;padding: 10px 20px;
+            <br />
+            }
+            <br />
+            <br />
+            /* Target an element */
+            <br />
+            p {
+            <br />
+            &nbsp;&nbsp;line-height: 1.6;
+            <br />
+            &nbsp;&nbsp;margin: 15px 0;
+            <br />
+            }
+            <br />
+            <br />
+            /* Target by ID */
+            <br />
+            #header {
+            <br />
+            &nbsp;&nbsp;background: #333;
+            <br />
+            &nbsp;&nbsp;color: white;
+            <br />
+            }
+          </div>
+
+          <div class="demo-box">
+            <span class="demo-label">Live Example:</span>
+            <p class="example-text example-3">
+              Green background button styling applied
+            </p>
+          </div>
+
+          <div class="callout">
+            <div class="callout-label">📌 Multiple Selectors</div>
+            <p>
+              You can apply the same declarations to multiple selectors by
+              separating them with commas:
+            </p>
+            <div class="code-block" style="margin-top: 10px">
+              h1, h2, h3 {
+              <br />
+              &nbsp;&nbsp;color: #667eea;
+              <br />
+              &nbsp;&nbsp;font-weight: bold;
+              <br />
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: CSS Statements -->
+        <section>
+          <h2>CSS Statements</h2>
+          <p>
+            A <span class="term">statement</span> is a complete CSS instruction
+            that either: a ruleset (selector + declaration block) or an
+            <code>@-rule</code> (meta-information like imports or media
+            queries).
+          </p>
+
+          <p><strong>Types of statements:</strong></p>
+
+          <h3 style="color: #764ba2; margin-top: 20px; margin-bottom: 10px">
+            1. Rulesets (Regular Rules)
+          </h3>
+          <p>
+            The most common type. A selector followed by a declaration block:
+          </p>
+          <div class="code-block">
+            /* This is a statement (a ruleset) */
+            <br />
+            button {
+            <br />
+            &nbsp;&nbsp;background: blue;
+            <br />
+            &nbsp;&nbsp;border: none;
+            <br />
+            &nbsp;&nbsp;cursor: pointer;
+            <br />
+            }
+          </div>
+
+          <h3 style="color: #764ba2; margin-top: 20px; margin-bottom: 10px">
+            2. At-Rules (@-Rules)
+          </h3>
+          <p>
+            Special statements that start with <code>@</code>. They convey
+            meta-data or conditional information:
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">Media Query (responsive design):</span>
+            @media (max-width: 600px) {
+            <br />
+            &nbsp;&nbsp;body {
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;font-size: 14px;
+            <br />
+            &nbsp;&nbsp;}
+            <br />
+            }
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">Import (load external styles):</span>
+            @import url('fonts.css');
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">Font-Face (custom fonts):</span>
+            @font-face {
+            <br />
+            &nbsp;&nbsp;font-family: 'MyFont';
+            <br />
+            &nbsp;&nbsp;src: url('myfont.woff2') format('woff2');
+            <br />
+            }
+          </div>
+
+          <div class="callout">
+            <div class="callout-label">🎯 Remember</div>
+            <p>
+              Every CSS file is essentially a list of
+              <strong>statements</strong>. Each statement is either a
+              <strong>ruleset</strong> or an <strong>@-rule</strong>. Anything
+              else is ignored by the browser.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 6: Complete Example -->
+        <section>
+          <h2>Complete Example: Putting It All Together</h2>
+          <p>
+            Here's how declarations, blocks, rulesets, and statements work
+            together:
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">A complete CSS file:</span>
+            /* Statement 1: Import external styles */
+            <br />
+            @import url('reset.css');
+            <br />
+            <br />
+            /* Statement 2: Ruleset for body */
+            <br />
+            body {
+            <br />
+            &nbsp;&nbsp;font-family: Arial, sans-serif;
+            <br />
+            &nbsp;&nbsp;margin: 0;
+            <br />
+            &nbsp;&nbsp;padding: 0;
+            <br />
+            }
+            <br />
+            <br />
+            /* Statement 3: Ruleset for headings */
+            <br />
+            h1, h2, h3 {
+            <br />
+            &nbsp;&nbsp;color: #333;
+            <br />
+            &nbsp;&nbsp;font-weight: bold;
+            <br />
+            }
+            <br />
+            <br />
+            /* Statement 4: Media query (responsive) */
+            <br />
+            @media (max-width: 768px) {
+            <br />
+            &nbsp;&nbsp;body {
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;font-size: 14px;
+            <br />
+            &nbsp;&nbsp;}
+            <br />
+            }
+          </div>
+
+          <div class="callout">
+            <div class="callout-label">✅ Analysis</div>
+            <ul style="margin: 10px 0 0 20px; line-height: 1.8">
+              <li>
+                <strong>@import</strong> – an at-rule statement (meta-data)
+              </li>
+              <li>
+                <strong>body { ... }</strong> – a ruleset with 2 declarations
+              </li>
+              <li>
+                <strong>h1, h2, h3 { ... }</strong> – a ruleset with multiple
+                selectors and 2 declarations
+              </li>
+              <li>
+                <strong>@media (max-width: 768px) { ... }</strong> – a
+                conditional at-rule statement
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 7: Quick Reference -->
+        <section>
+          <h2>Quick Reference</h2>
+          <div class="demo-box" style="background: white">
+            <table
+              style="width: 100%; border-collapse: collapse; font-size: 0.95rem"
+            >
+              <thead>
+                <tr style="background: #667eea; color: white; text-align: left">
+                  <th style="padding: 12px; border: 1px solid #ddd">Term</th>
+                  <th style="padding: 12px; border: 1px solid #ddd">
+                    What It Is
+                  </th>
+                  <th style="padding: 12px; border: 1px solid #ddd">Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    style="
+                      padding: 12px;
+                      border: 1px solid #ddd;
+                      font-weight: 600;
+                      color: #667eea;
+                    "
+                  >
+                    Declaration
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    A property-value pair
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    <code>color: blue;</code>
+                  </td>
+                </tr>
+                <tr style="background: #f9f9f9">
+                  <td
+                    style="
+                      padding: 12px;
+                      border: 1px solid #ddd;
+                      font-weight: 600;
+                      color: #667eea;
+                    "
+                  >
+                    Declaration Block
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    Group of declarations in { }
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    <code>{ color: blue; margin: 10px; }</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      padding: 12px;
+                      border: 1px solid #ddd;
+                      font-weight: 600;
+                      color: #667eea;
+                    "
+                  >
+                    Ruleset
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    Selector + declaration block
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    <code>p { color: blue; }</code>
+                  </td>
+                </tr>
+                <tr style="background: #f9f9f9">
+                  <td
+                    style="
+                      padding: 12px;
+                      border: 1px solid #ddd;
+                      font-weight: 600;
+                      color: #667eea;
+                    "
+                  >
+                    Statement
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    A complete CSS instruction
+                  </td>
+                  <td style="padding: 12px; border: 1px solid #ddd">
+                    <code>p { ... }</code> or <code>@media ...</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 8: Key Takeaways -->
+        <section>
+          <h2>Key Takeaways</h2>
+          <div class="callout">
+            <ul style="margin: 15px 0 0 20px; line-height: 2">
+              <li>
+                <strong>Declarations</strong> are the building blocks: property
+                and value separated by a colon.
+              </li>
+              <li>
+                <strong>Declaration blocks</strong> group multiple declarations
+                together inside { }.
+              </li>
+              <li>
+                <strong>Rulesets</strong> combine a selector with a declaration
+                block to target elements.
+              </li>
+              <li>
+                <strong>Statements</strong> are the complete CSS instructions
+                (rulesets or @-rules).
+              </li>
+              <li>Always end declarations with a semicolon (;).</li>
+              <li>
+                Understanding this structure helps you write cleaner, more
+                maintainable CSS!
+              </li>
+            </ul>
+          </div>
+        </section>
+      </article>
+
+      <footer>
+        <p>
+          📚 Learn more:
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Syntax/Introduction"
+            >MDN CSS Syntax Guide</a
+          >
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

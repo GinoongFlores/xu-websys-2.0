@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flo’s Learning Log — Personal Blog</title>
+
+    <!--
+      POLISHED SAMPLE (Realistic page)
+      -------------------------------
+      This file is still a semantic-HTML lesson, but the UI is now a *realistic*
+      personal blog homepage instead of a “tag showcase”.
+
+      Semantic tags used:
+      - <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>
+
+      Teaching note:
+      - Semantic tags describe what content *is*.
+      - CSS handles layout and styling.
+    -->
+
+    <style>
+      /*
+        Step 1: Base styles.
+        Keep the CSS simple so it feels like a real small blog.
+      */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        color: #111;
+        background: #fff;
+      }
+
+      a {
+        color: #0b57d0;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /*
+        Step 2: A skip link improves keyboard navigation.
+        It becomes visible when focused.
+      */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 12px;
+        padding: 10px 12px;
+        border: 1px solid #111;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .skip-link:focus {
+        left: 12px;
+      }
+
+      /*
+        Step 3: A centered container makes the page readable.
+      */
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      /*
+        Step 4: Header and navigation.
+        The header often contains the site title + nav links.
+      */
+      .site-header {
+        border-bottom: 1px solid #e6e6e6;
+        padding-bottom: 16px;
+        margin-bottom: 18px;
+      }
+
+      .site-title {
+        margin: 0;
+        font-size: 1.8rem;
+      }
+
+      .site-tagline {
+        margin: 6px 0 0;
+        color: #444;
+      }
+
+      .site-nav {
+        margin-top: 14px;
+      }
+
+      .site-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .site-nav a {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        color: inherit;
+        background: #fafafa;
+      }
+
+      /*
+        Step 5: Two-column blog layout using Flexbox.
+        - main: post list (flex: grows)
+        - aside: sidebar (fixed-ish width)
+      */
+      .layout {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+      }
+
+      .layout > main {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .layout > aside {
+        flex: 0 0 320px;
+      }
+
+      /*
+        Step 6: Post list styling.
+        Each post preview is an <article>.
+      */
+      .section-title {
+        margin: 0 0 12px;
+        font-size: 1.3rem;
+      }
+
+      .post-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .post {
+        border: 1px solid #e6e6e6;
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .post h2 {
+        margin: 0 0 6px;
+        font-size: 1.2rem;
+      }
+
+      .post-meta {
+        margin: 0 0 10px;
+        color: #555;
+        font-size: 0.95rem;
+      }
+
+      .post p {
+        margin: 0 0 10px;
+        color: #333;
+      }
+
+      .post-footer {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .chip {
+        font-size: 0.9rem;
+        padding: 2px 10px;
+        border: 1px solid #ddd;
+        border-radius: 999px;
+        background: #fafafa;
+        color: #333;
+      }
+
+      /*
+        Step 7: Sidebar widgets.
+        Sidebars commonly include about info, categories, and sign-up forms.
+      */
+      .sidebar {
+        border-left: 1px solid #e6e6e6;
+        padding-left: 18px;
+      }
+
+      .widget {
+        margin-bottom: 18px;
+      }
+
+      .widget h3 {
+        margin: 0 0 10px;
+        font-size: 1.1rem;
+      }
+
+      .widget p {
+        margin: 0 0 10px;
+        color: #333;
+      }
+
+      .widget ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      input[type="email"] {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font: inherit;
+      }
+
+      button {
+        padding: 10px 12px;
+        border: 1px solid #111;
+        border-radius: 8px;
+        background: #111;
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+        width: fit-content;
+      }
+
+      button:hover {
+        filter: brightness(1.05);
+      }
+
+      /*
+        Step 8: Footer.
+      */
+      .site-footer {
+        border-top: 1px solid #e6e6e6;
+        margin-top: 22px;
+        padding-top: 16px;
+        color: #444;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      /*
+        Step 9: Responsive layout.
+        On small screens, the sidebar stacks under the posts.
+      */
+      @media (max-width: 900px) {
+        .container {
+          padding: 18px;
+        }
+
+        .layout {
+          flex-direction: column;
+        }
+
+        .layout > aside {
+          flex-basis: auto;
+        }
+
+        .sidebar {
+          border-left: none;
+          padding-left: 0;
+          border-top: 1px solid #e6e6e6;
+          padding-top: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Accessibility: skip to main content -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="container">
+      <!--
+        <header> typically contains the site title and navigation.
+      -->
+      <header class="site-header" id="home">
+        <h1 class="site-title">Flo’s Learning Log</h1>
+        <p class="site-tagline">
+          Notes on HTML, CSS, and JavaScript — one small project at a time.
+        </p>
+
+        <!--
+          <nav> contains the main navigation links.
+        -->
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#home" aria-current="page">Home</a></li>
+            <li><a href="#posts">Posts</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="layout">
+        <!--
+          <main> holds the unique content for this page.
+          Best practice: one <main> per page.
+        -->
+        <main id="main" aria-labelledby="posts-title">
+          <section id="posts" aria-labelledby="posts-title">
+            <h2 id="posts-title" class="section-title">Latest posts</h2>
+
+            <div class="post-list">
+              <!--
+                Each <article> is a self-contained post preview.
+              -->
+              <article class="post" aria-labelledby="post-1-title">
+                <header>
+                  <h2 id="post-1-title">Building a simple blog layout</h2>
+                  <p class="post-meta">
+                    <time datetime="2026-02-13">Feb 13, 2026</time> • 4 min read
+                  </p>
+                </header>
+
+                <p>
+                  Today I rebuilt my homepage using semantic tags and a basic
+                  grid. It’s not fancy — just clean structure and readable
+                  spacing.
+                </p>
+
+                <footer class="post-footer">
+                  <span class="chip">CSS Grid</span>
+                  <span class="chip">Semantic HTML</span>
+                  <a
+                    href="#"
+                    aria-label="Read more: Building a simple blog layout"
+                  >
+                    Read more
+                  </a>
+                </footer>
+              </article>
+
+              <article class="post" aria-labelledby="post-2-title">
+                <header>
+                  <h2 id="post-2-title">My checklist for accessible pages</h2>
+                  <p class="post-meta">
+                    <time datetime="2026-02-10">Feb 10, 2026</time> • 3 min read
+                  </p>
+                </header>
+
+                <p>
+                  I’m practicing small habits: one <code>&lt;main&gt;</code>
+                  per page, meaningful headings, and a skip link for keyboard
+                  users.
+                </p>
+
+                <footer class="post-footer">
+                  <span class="chip">Accessibility</span>
+                  <span class="chip">HTML</span>
+                  <a
+                    href="#"
+                    aria-label="Read more: My checklist for accessible pages"
+                  >
+                    Read more
+                  </a>
+                </footer>
+              </article>
+
+              <article class="post" aria-labelledby="post-3-title">
+                <header>
+                  <h2 id="post-3-title">Why I write learning notes</h2>
+                  <p class="post-meta">
+                    <time datetime="2026-02-05">Feb 5, 2026</time> • 2 min read
+                  </p>
+                </header>
+
+                <p>
+                  Writing short summaries helps me remember what I built, what
+                  broke, and what I want to try next.
+                </p>
+
+                <footer class="post-footer">
+                  <span class="chip">Learning</span>
+                  <a href="#" aria-label="Read more: Why I write learning notes"
+                    >Read more</a
+                  >
+                </footer>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <!--
+          <aside> is related content that supports the main content.
+          This is a realistic blog sidebar.
+        -->
+        <aside class="sidebar" id="about" aria-labelledby="sidebar-title">
+          <h2 id="sidebar-title" class="section-title">Sidebar</h2>
+
+          <section class="widget" aria-labelledby="about-title">
+            <h3 id="about-title">About me</h3>
+            <p>
+              Hi! I’m Flo. I’m learning front-end basics by building small pages
+              and writing down what I discover.
+            </p>
+          </section>
+
+          <section class="widget" aria-labelledby="categories-title">
+            <h3 id="categories-title">Categories</h3>
+            <ul>
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">JavaScript</a></li>
+              <li><a href="#">Accessibility</a></li>
+            </ul>
+          </section>
+
+          <section class="widget" aria-labelledby="newsletter-title">
+            <h3 id="newsletter-title">Newsletter</h3>
+            <p>Get one email when I publish a new post.</p>
+
+            <!--
+              A small form is a real-world sidebar pattern.
+              Labels make forms accessible.
+            -->
+            <form action="#" method="post">
+              <div class="field">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+              <div class="field">
+                <button type="submit">Subscribe</button>
+              </div>
+            </form>
+          </section>
+        </aside>
+      </div>
+
+      <!--
+        <footer> contains site-wide footer info.
+      -->
+      <footer class="site-footer" id="contact" aria-label="Site footer">
+        <p style="margin: 0">
+          © 2026 Flo’s Learning Log •
+          <a href="mailto:flo@example.com">flo@example.com</a>
+        </p>
+
+        <ul class="footer-links" aria-label="Footer links">
+          <li><a href="#">Archive</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </footer>
+    </div>
+  </body>
+</html>

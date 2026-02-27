@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox Starter: Student Version</title>
+
+    <style>
+      /* ========================================
+         GLOBAL STYLES
+         ======================================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.5;
+        color: #333;
+        background: #fff;
+        padding: 24px;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* ========================================
+         HEADER
+         ======================================== */
+      header {
+        margin-bottom: 24px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        margin: 0 0 8px;
+      }
+
+      header p {
+        font-size: 1rem;
+        color: #555;
+      }
+
+      /* ========================================
+         SECTIONS
+         ======================================== */
+      section {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+
+      section h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 12px;
+      }
+
+      section p {
+        margin-bottom: 12px;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* ========================================
+         CODE AND TERMS
+         ======================================== */
+      code {
+        background: #f0f0f0;
+        color: #333;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+      }
+
+      strong {
+        color: #222;
+        font-weight: 600;
+      }
+
+      /* ========================================
+         VISUAL DIAGRAMS
+         ======================================== */
+      .axis-visual {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+      }
+
+      .axis-card {
+        background: #fafafa;
+        border: 1px dashed #aaa;
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      .axis-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 12px;
+        color: #333;
+        text-align: center;
+      }
+
+      .axis-diagram {
+        position: relative;
+        height: 150px;
+        background: white;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+
+      .axis-line {
+        position: absolute;
+        background: #555;
+        z-index: 1;
+      }
+
+      .axis-line.horizontal {
+        height: 2px;
+        left: 20px;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .axis-line.horizontal::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: -12px;
+        font-size: 18px;
+        color: #555;
+      }
+
+      .axis-line.vertical {
+        width: 2px;
+        top: 20px;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .axis-line.vertical::after {
+        content: "↓";
+        position: absolute;
+        bottom: -20px;
+        left: -9px;
+        font-size: 18px;
+        color: #555;
+      }
+
+      .axis-label {
+        position: absolute;
+        background: #333;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .axis-row .main-label {
+        right: 20px;
+        top: calc(50% - 35px);
+      }
+
+      .axis-row .cross-label {
+        left: 20px;
+        top: 20px;
+      }
+
+      .axis-column .main-label {
+        left: 20px;
+        bottom: 20px;
+      }
+
+      .axis-column .cross-label {
+        right: 20px;
+        top: calc(50% - 35px);
+      }
+
+      /* ========================================
+         DEMO BOXES
+         ======================================== */
+      .demo-container {
+        background: #fafafa;
+        border: 1px dashed #aaa;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 16px 0;
+      }
+
+      .demo-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+      }
+
+      /* Card Row Demo */
+      .card-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        background: white;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+
+      .card {
+        background: #f0f0f0;
+        color: #333;
+        padding: 20px 16px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        text-align: center;
+        flex: 1;
+      }
+
+      /* Tag List Demo */
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px;
+        background: white;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+
+      .tag {
+        background: #f0f0f0;
+        color: #333;
+        padding: 8px 16px;
+        border-radius: 16px;
+        border: 1px solid #ddd;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      /* Profile Row Demo */
+      .profile-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+        padding: 12px;
+        background: white;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        min-height: 150px;
+      }
+
+      .profile {
+        background: #f0f0f0;
+        color: #333;
+        padding: 20px 16px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        text-align: center;
+        flex: 1;
+      }
+
+      .highlight {
+        align-self: center;
+        background: #e0e0e0;
+        font-weight: 700;
+      }
+
+      /* ========================================
+         HINT BOXES
+         ======================================== */
+      .hint-box {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        padding: 12px;
+        margin: 12px 0;
+        border-radius: 6px;
+      }
+
+      .hint-box strong {
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+      }
+
+      .hint-box pre {
+        background: #111;
+        color: #f3f3f3;
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-top: 8px;
+      }
+
+      /* ========================================
+         CHECKLIST
+         ======================================== */
+      ul {
+        margin: 12px 0 12px 20px;
+        line-height: 1.8;
+      }
+
+      li {
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+
+      li code {
+        margin: 0 2px;
+      }
+
+      /* ========================================
+         INFO BOXES
+         ======================================== */
+      .info-box {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 12px 0;
+      }
+
+      .info-box p {
+        margin: 0;
+        color: #333;
+        font-weight: 400;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <!-- Header Section: Introduce the topic and goal -->
+      <header>
+        <h1>Flexbox Starter</h1>
+        <p>
+          Build a simple layout using Flexbox by editing the HTML structure and
+          your own CSS in a separate file.
+        </p>
+      </header>
+
+      <!-- Section 1: Flexbox concept overview -->
+      <section>
+        <h2>What Is Flexbox?</h2>
+        <p>
+          Flexbox is a CSS layout system for arranging items in a row or column.
+          It works best when you have a parent <strong>container</strong> and
+          several <strong>children</strong>.
+        </p>
+        <p>
+          Your task: create a parent container, give it
+          <code>display: flex</code>, and then experiment with alignment.
+        </p>
+
+        <div class="info-box">
+          <p>
+            <strong>Key Concept:</strong> Flexbox always has a parent (the flex
+            container) and children (the flex items). The parent controls how
+            the children are arranged!
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 2: Main Axis vs Cross Axis (key idea) -->
+      <section>
+        <h2>Main Axis vs Cross Axis</h2>
+        <p>
+          Flexbox uses two axes. The <strong>main axis</strong> follows
+          <code>flex-direction</code>, and the <strong>cross axis</strong> runs
+          perpendicular to it.
+        </p>
+        <p>
+          Remember: <code>justify-content</code> aligns on the main axis and
+          <code>align-items</code> aligns on the cross axis.
+        </p>
+
+        <!-- Visual Axis Diagrams -->
+        <div class="axis-visual">
+          <div class="axis-card">
+            <div class="axis-title">Row Direction</div>
+            <div class="axis-diagram axis-row">
+              <div class="axis-line horizontal"></div>
+              <div class="axis-line vertical"></div>
+              <div class="axis-label main-label">Main Axis</div>
+              <div class="axis-label cross-label">Cross Axis</div>
+            </div>
+          </div>
+
+          <div class="axis-card">
+            <div class="axis-title">Column Direction</div>
+            <div class="axis-diagram axis-column">
+              <div class="axis-line vertical"></div>
+              <div class="axis-line horizontal"></div>
+              <div class="axis-label main-label">Main Axis</div>
+              <div class="axis-label cross-label">Cross Axis</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <p>
+            <strong>Row:</strong> Main axis is left → right, Cross axis is top →
+            bottom.<br />
+            <strong>Column:</strong> Main axis is top → bottom, Cross axis is
+            left → right.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 3: Basic Flex Container Example -->
+      <section>
+        <h2>Flex Container Basics</h2>
+        <p>
+          The container controls the main direction, spacing, and alignment.
+          Start with these core properties:
+        </p>
+
+        <ul>
+          <li><code>display: flex</code> turns on Flexbox.</li>
+          <li><code>flex-direction</code> sets row or column.</li>
+          <li><code>justify-content</code> aligns along the main axis.</li>
+          <li><code>align-items</code> aligns along the cross axis.</li>
+          <li><code>gap</code> adds space between items.</li>
+        </ul>
+
+        <div class="demo-container">
+          <div class="demo-label">
+            Interactive Demo: Flex Container with Cards
+          </div>
+          <div class="card-row">
+            <div class="card">Card A</div>
+            <div class="card">Card B</div>
+            <div class="card">Card C</div>
+          </div>
+        </div>
+
+        <div class="hint-box">
+          <strong>Try This CSS:</strong>
+          <pre>
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}</pre
+          >
+        </div>
+      </section>
+
+      <!-- Section 4: Wrapping Example -->
+      <section>
+        <h2>Wrapping and Flexible Sizes</h2>
+        <p>
+          Create a row of tags that wraps onto a new line when there is not
+          enough space. Use <code>flex-wrap: wrap</code> to enable wrapping!
+        </p>
+
+        <div class="demo-container">
+          <div class="demo-label">
+            Interactive Demo: Wrapping Tags (Try Resizing Your Browser!)
+          </div>
+          <div class="tag-list">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Flexbox</span>
+            <span class="tag">Layout</span>
+            <span class="tag">Responsive</span>
+            <span class="tag">Design</span>
+            <span class="tag">Web Dev</span>
+          </div>
+        </div>
+
+        <div class="hint-box">
+          <strong>Try This CSS:</strong>
+          <pre>
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag {
+  padding: 10px 20px;
+  border-radius: 20px;
+}</pre
+          >
+        </div>
+
+        <div class="info-box">
+          <p>
+            <strong>Tip:</strong> Without <code>flex-wrap</code>, items will
+            shrink to fit in one line. With wrapping, they move to a new line
+            when space runs out!
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 5: Align One Item Differently -->
+      <section>
+        <h2>Aligning Individual Items</h2>
+        <p>
+          Use <code>align-self</code> to move one item while the rest stay
+          aligned together. This overrides the container's
+          <code>align-items</code> setting!
+        </p>
+
+        <div class="demo-container">
+          <div class="demo-label">
+            Interactive Demo: Individual Alignment with align-self
+          </div>
+          <div class="profile-row">
+            <div class="profile">Low</div>
+            <div class="profile highlight">Center (Highlighted!)</div>
+            <div class="profile">Top</div>
+          </div>
+        </div>
+
+        <div class="hint-box">
+          <strong>Try This CSS:</strong>
+          <pre>
+.profile-row {
+  display: flex;
+  align-items: flex-end;  /* Default for all items */
+  gap: 15px;
+}
+
+.highlight {
+  align-self: center;  /* Override for this one item */
+}</pre
+          >
+        </div>
+
+        <div class="info-box">
+          <p>
+            <strong>Notice:</strong> The first and third items align to the
+            bottom (<code>flex-end</code>), but the middle one uses
+            <code>align-self: center</code> to position itself differently!
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 6: Quick Checklist -->
+      <section>
+        <h2>Flexbox Checklist</h2>
+        <p>Follow this checklist to master Flexbox basics:</p>
+        <ul>
+          <li>Apply <code>display: flex</code> to the parent container.</li>
+          <li>Choose row or column with <code>flex-direction</code>.</li>
+          <li>
+            Use <code>justify-content</code> to align on the
+            <strong>main axis</strong>.
+          </li>
+          <li>
+            Use <code>align-items</code> to align on the
+            <strong>cross axis</strong>.
+          </li>
+          <li>Try wrapping with <code>flex-wrap</code> if items overflow.</li>
+          <li>
+            Use <code>align-self</code> for one-off adjustments on individual
+            items.
+          </li>
+          <li>
+            Add <code>gap</code> to create space between flex items easily!
+          </li>
+        </ul>
+
+        <div class="info-box">
+          <p>
+            <strong>Practice Tip:</strong> Open your browser's Developer Tools
+            (F12) and experiment with these properties in real-time. Change
+            values and see what happens!
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Combinators: Descendant, Child, Sibling Selectors</title>
+  </head>
+
+  <body>
+    <main>
+      <!-- Header Section -->
+      <header>
+        <h1>Understanding CSS Combinators</h1>
+        <p>
+          Master descendant, child, and sibling selectors to target elements
+          based on their relationships
+        </p>
+      </header>
+
+      <!-- Main Content -->
+      <article>
+        <!-- Section 1: Introduction -->
+        <section>
+          <h2>What Are Combinators?</h2>
+          <p>
+            Combinators are symbols in CSS that help you select elements based
+            on their relationships to other elements in the DOM (Document Object
+            Model). They let you say things like "Select paragraphs that are
+            inside a box" or "Select a paragraph that immediately follows a
+            heading."
+          </p>
+          <p>
+            Instead of giving every element a unique class, combinators let you
+            write smarter selectors that work with your HTML structure.
+          </p>
+          <p>There are four main types of combinators:</p>
+          <ul>
+            <li>Descendant combinator (space) – selects any nested element</li>
+            <li>
+              Child combinator (>) – selects direct children only
+            </li>
+            <li>
+              Next-sibling combinator (+) – selects the next sibling
+            </li>
+            <li>
+              Subsequent-sibling combinator (~) – selects all following siblings
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 2: Descendant Combinator -->
+        <section>
+          <h2>1. Descendant Combinator (Space)</h2>
+          <p>
+            The descendant combinator is represented by a single space between
+            two selectors. It matches any element that is nested inside another
+            element, no matter how deeply.
+          </p>
+
+          <h3>Syntax:</h3>
+          <p>
+            <code>parent child { /* Styles */ }</code>
+          </p>
+
+          <h3>Example:</h3>
+          <p>
+            <code>.box p { color: blue; }</code>
+          </p>
+          <p>
+            This selector says: "Select every &lt;p&gt; element that is a
+            descendant of an element with class 'box'. Any &lt;p&gt; nested
+            inside—whether direct child or grandchild—will match."
+          </p>
+
+          <h3>Try It!</h3>
+          <p>
+            Create the HTML and CSS below. Add your own styles to see how the
+            descendant combinator works:
+          </p>
+          <p>
+            <code>
+              &lt;div class="box"&gt;<br />
+              &nbsp;&nbsp;&lt;p&gt;This paragraph is inside .box&lt;/p&gt;<br />
+              &nbsp;&nbsp;&lt;div&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;This paragraph is nested via a
+              div&lt;/p&gt;<br />
+              &nbsp;&nbsp;&lt;/div&gt;<br />
+              &lt;/div&gt;<br />
+              &lt;p&gt;This paragraph is NOT inside .box&lt;/p&gt;
+            </code>
+          </p>
+
+          <p>
+            Key Point: The descendant combinator matches any level of nesting.
+            If a &lt;p&gt; is 3 divs deep inside a .box, it still matches!
+          </p>
+        </section>
+
+        <!-- Section 3: Child Combinator -->
+        <section>
+          <h2>2. Child Combinator (>)</h2>
+          <p>
+            The child combinator is represented by the > symbol. It matches only
+            direct children of an element, not grandchildren or deeper
+            descendants.
+          </p>
+
+          <h3>Syntax:</h3>
+          <p>
+            <code>parent > child { /* Styles */ }</code>
+          </p>
+
+          <h3>Example:</h3>
+          <p>
+            <code>
+              ul > li {<br />
+              &nbsp;&nbsp;border-top: 5px solid red;<br />
+              }
+            </code>
+          </p>
+          <p>
+            This selector says: "Select every &lt;li&gt; that is a direct child
+            of a &lt;ul&gt;. If an &lt;li&gt; is nested inside another list
+            (grandchild), it won't be selected."
+          </p>
+
+          <h3>Try It!</h3>
+          <p>Create this HTML and experiment with > selector:</p>
+          <p>
+            <code>
+              &lt;div class="container"&gt;<br />
+              &nbsp;&nbsp;&lt;p&gt;Direct child paragraph&lt;/p&gt;<br />
+              &nbsp;&nbsp;&lt;div class="nested"&gt;<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Nested paragraph inside a
+              div&lt;/p&gt;<br />
+              &nbsp;&nbsp;&lt;/div&gt;<br />
+              &lt;/div&gt;
+            </code>
+          </p>
+
+          <p>
+            Difference from Descendant: <code>.box p</code> matches &lt;p&gt; at
+            any depth inside .box. <code>.box > p</code> matches ONLY
+            &lt;p&gt; elements that are direct children of .box.
+          </p>
+        </section>
+
+        <!-- Section 4: Next-Sibling Combinator -->
+        <section>
+          <h2>3. Next-Sibling Combinator (+)</h2>
+          <p>
+            The next-sibling combinator is represented by the + symbol. It
+            matches an element that comes immediately after another element as a
+            sibling (they share the same parent).
+          </p>
+
+          <h3>Syntax:</h3>
+          <p>
+            <code>element1 + element2 { /* Styles */ }</code>
+          </p>
+
+          <h3>Example:</h3>
+          <p>
+            <code>
+              h1 + p {<br />
+              &nbsp;&nbsp;font-weight: bold;<br />
+              &nbsp;&nbsp;background-color: #333;<br />
+              &nbsp;&nbsp;color: white;<br />
+              &nbsp;&nbsp;padding: 0.5em;<br />
+              }
+            </code>
+          </p>
+          <p>
+            This selector says: "Select the &lt;p&gt; that comes immediately
+            after an &lt;h1&gt;. If any other element (like &lt;h2&gt; or
+            &lt;div&gt;) comes between them, the paragraph won't match."
+          </p>
+
+          <h3>Try It!</h3>
+          <p>
+            <code>
+              &lt;h3&gt;Heading 1&lt;/h3&gt;<br />
+              &lt;p&gt;This paragraph immediately follows the heading&lt;/p&gt;<br />
+              &lt;h3&gt;Heading 2&lt;/h3&gt;<br />
+              &lt;p&gt;Another paragraph immediately follows this heading&lt;/p&gt;<br />
+              &lt;h3&gt;Heading 3&lt;/h3&gt;<br />
+              &lt;div&gt;A div is here&lt;/div&gt;<br />
+              &lt;p&gt;This paragraph does NOT immediately follow the
+              heading&lt;/p&gt;
+            </code>
+          </p>
+
+          <p>
+            Use Case: Perfect for styling the first paragraph after a heading
+            with special formatting, or styling an input that comes right after a
+            label.
+          </p>
+        </section>
+
+        <!-- Section 5: Subsequent-Sibling Combinator -->
+        <section>
+          <h2>4. Subsequent-Sibling Combinator (~)</h2>
+          <p>
+            The subsequent-sibling combinator is represented by the ~ symbol. It
+            matches an element that comes anywhere after another element as a
+            sibling (not necessarily immediately).
+          </p>
+
+          <h3>Syntax:</h3>
+          <p>
+            <code>element1 ~ element2 { /* Styles */ }</code>
+          </p>
+
+          <h3>Example:</h3>
+          <p>
+            <code>
+              h1 ~ p {<br />
+              &nbsp;&nbsp;font-weight: bold;<br />
+              &nbsp;&nbsp;background-color: #333;<br />
+              &nbsp;&nbsp;color: white;<br />
+              &nbsp;&nbsp;padding: 0.5em;<br />
+              }
+            </code>
+          </p>
+          <p>
+            This selector says: "Select every &lt;p&gt; that comes anywhere
+            after an &lt;h1&gt;, even if there are other elements in between. It
+            doesn't have to be immediately after."
+          </p>
+
+          <h3>Try It!</h3>
+          <p>
+            <code>
+              &lt;h2&gt;Main Heading&lt;/h2&gt;<br />
+              &lt;p&gt;First paragraph after heading&lt;/p&gt;<br />
+              &lt;div&gt;Some other content in between&lt;/div&gt;<br />
+              &lt;p&gt;Second paragraph after heading, even with a div in
+              between&lt;/p&gt;
+            </code>
+          </p>
+
+          <p>
+            Difference from Next-Sibling: <code>h1 + p</code> matches only the
+            &lt;p&gt; that immediately follows &lt;h1&gt;.
+            <code>h1 ~ p</code> matches all &lt;p&gt; elements that come
+            anywhere after &lt;h1&gt;.
+          </p>
+        </section>
+
+        <!-- Section 6: Quick Reference Table -->
+        <section>
+          <h2>Quick Reference: All Combinators</h2>
+          <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Combinator</th>
+                <th>Symbol</th>
+                <th>What It Does</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Descendant</td>
+                <td>(space)</td>
+                <td>Matches any nested element</td>
+                <td><code>.box p</code></td>
+              </tr>
+              <tr>
+                <td>Child</td>
+                <td>></td>
+                <td>Matches direct children only</td>
+                <td><code>ul > li</code></td>
+              </tr>
+              <tr>
+                <td>Next-Sibling</td>
+                <td>+</td>
+                <td>Matches the next sibling</td>
+                <td><code>h1 + p</code></td>
+              </tr>
+              <tr>
+                <td>Subsequent-Sibling</td>
+                <td>~</td>
+                <td>Matches any following sibling</td>
+                <td><code>h1 ~ p</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Section 7: Real-World Examples -->
+        <section>
+          <h2>Real-World Usage Tips</h2>
+
+          <h3>Use Combinators When:</h3>
+          <ul>
+            <li>
+              You want to style elements based on their position in the HTML
+              structure
+            </li>
+            <li>
+              You can't add classes to every element you want to style (e.g.,
+              generated HTML from a CMS)
+            </li>
+            <li>You want to keep your HTML cleaner with fewer classes</li>
+            <li>You're building responsive layouts with CSS Grid or Flexbox</li>
+          </ul>
+
+          <h3>Avoid Over-Complicated Combinators:</h3>
+          <p>
+            While combinators are powerful, avoid writing selectors that are too
+            specific to the HTML structure, as they become hard to maintain:
+          </p>
+          <p>
+            <code>
+              /* Too specific (hard to maintain) */<br />
+              article > div > div > p {<br />
+              &nbsp;&nbsp;color: blue;<br />
+              }
+            </code>
+          </p>
+
+          <p>
+            <code>
+              /* Better (easier to maintain) */<br />
+              .my-paragraph {<br />
+              &nbsp;&nbsp;color: blue;<br />
+              }
+            </code>
+          </p>
+
+          <p>
+            Best Practice: Use combinators to write elegant selectors, not to
+            avoid using classes. A good mix of both classes and combinators
+            creates maintainable, readable CSS.
+          </p>
+        </section>
+
+        <!-- Section 8: Key Takeaways -->
+        <section>
+          <h2>Key Takeaways</h2>
+          <ul>
+            <li>
+              Combinators let you select elements based on their relationships in
+              the DOM.
+            </li>
+            <li>
+              Descendant (space) matches any nested element at any depth.
+            </li>
+            <li>
+              Child (>) matches only direct children, not grandchildren.
+            </li>
+            <li>
+              Next-sibling (+) matches the immediately following sibling.
+            </li>
+            <li>
+              Subsequent-sibling (~) matches any sibling that comes after.
+            </li>
+            <li>
+              Use combinators to write cleaner CSS, but balance them with
+              classes for maintainability.
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <footer>
+        <p>
+          Learn more:
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Combinators"
+            >MDN CSS Combinators Guide</a
+          >
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

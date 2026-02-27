@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Activity - Semantic Blog Layout with Flexbox, CSS Syntax, and Combinators
+    </title>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Activity: Semantic Blog Layout with Flexbox, CSS Syntax, and Combinators
+      </h1>
+      <p><strong>Course:</strong> Web Systems and Technologies</p>
+      <p><strong>Total Points:</strong> 50</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Objective</h2>
+        <p>This activity helps you:</p>
+        <ul>
+          <li>Practice semantic HTML structure</li>
+          <li>Apply CSS Flexbox for layout</li>
+          <li>Use correct CSS syntax (selectors + declarations)</li>
+          <li>Apply CSS combinators to target elements cleanly</li>
+        </ul>
+        <p>Focus on structure and layout, not heavy animations.</p>
+      </section>
+
+      <section>
+        <h2>Activity Description</h2>
+        <p>Create a simple blog-style webpage using:</p>
+        <ul>
+          <li>Semantic HTML elements</li>
+          <li>CSS Flexbox for the main layout (required)</li>
+          <li>CSS combinators (required)</li>
+          <li>Correct CSS syntax (required)</li>
+        </ul>
+        <p>You may:</p>
+        <ul>
+          <li>
+            Reuse your activity from:
+            <a
+              href="https://xavierateneo.instructure.com/courses/2255/assignments/5125"
+              >https://xavierateneo.instructure.com/courses/2255/assignments/5125</a
+            >
+          </li>
+          <li>Redesign the layout and content to show your own effort</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Required Semantic Elements</h2>
+        <p>Your layout must include:</p>
+        <ul>
+          <li>header</li>
+          <li>nav</li>
+          <li>main</li>
+          <li>section and/or article</li>
+          <li>aside</li>
+          <li>footer</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Layout Requirements (Flexbox Only)</h2>
+        <p>You must use:</p>
+        <ul>
+          <li>Flexbox for the main layout (required)</li>
+          <li>
+            Responsive behavior (required) using a media query or flexible units
+          </li>
+        </ul>
+        <p>Your page must include:</p>
+        <ul>
+          <li>A header with a site title (blog name)</li>
+          <li>A navigation menu</li>
+          <li>
+            A main content area with blog posts (use article for each post)
+          </li>
+          <li>
+            A sidebar (aside) with supporting content (about, categories, etc.)
+          </li>
+          <li>A footer with basic site info (copyright or contact)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>CSS Syntax Refresher (Required)</h2>
+        <p>Write clean CSS using proper selector + declaration block syntax.</p>
+        <p>Example:</p>
+        <pre><code class="language-css">/* Selector targets elements */
+article h2 {
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+</code></pre>
+      </section>
+
+      <section>
+        <h2>CSS Combinators (Required)</h2>
+        <p>
+          Use at least 4 different combinators in your CSS. You must demonstrate
+          all of these:
+        </p>
+        <ul>
+          <li>Descendant selector: <code>A B</code></li>
+          <li>Child selector: <code>A &gt; B</code></li>
+          <li>Adjacent sibling selector: <code>A + B</code></li>
+          <li>General sibling selector: <code>A ~ B</code></li>
+        </ul>
+        <p>
+          Include short comments in your CSS to label the combinators and syntax
+          you are using so the instructor can quickly see them.
+        </p>
+        <p>Example usage:</p>
+        <pre><code class="language-css">/* Descendant */
+main article p {
+  line-height: 1.6;
+}
+
+/* Child */
+nav &gt; ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+/* Adjacent sibling */
+h2 + p {
+  color: #444;
+}
+
+/* General sibling */
+h2 ~ ul {
+  padding-left: 1.2rem;
+}
+</code></pre>
+      </section>
+
+      <section>
+        <h2>Design Expectations</h2>
+        <ul>
+          <li>Clean spacing and alignment</li>
+          <li>Proper use of margins and padding</li>
+          <li>Readable typography</li>
+          <li>Logical heading hierarchy (h1 then h2, etc.)</li>
+        </ul>
+        <p>
+          You are not graded on artistic design, but layout clarity matters.
+        </p>
+      </section>
+
+      <section>
+        <h2>Submission Instructions</h2>
+        <ul>
+          <li>Submit your CodePen link in Canvas.</li>
+          <li>
+            Your CodePen must include:
+            <ul>
+              <li>HTML with the required semantic elements</li>
+              <li>CSS using Flexbox for layout</li>
+              <li>CSS combinators (all four types)</li>
+              <li>Responsive behavior (at least one breakpoint)</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Grading Rubric (50 Points)</h2>
+
+        <h3>1. Semantic HTML Structure (12 pts)</h3>
+        <ul>
+          <li>10-12: Proper and meaningful use of semantic elements</li>
+          <li>7-9: Mostly correct usage with minor issues</li>
+          <li>4-6: Some misuse or missing semantic tags</li>
+          <li>0-3: Poor or incorrect structure</li>
+        </ul>
+
+        <h3>2. Flexbox Layout Implementation (12 pts)</h3>
+        <ul>
+          <li>
+            10-12: Layout works correctly and shows clear understanding of
+            Flexbox
+          </li>
+          <li>7-9: Functional layout with minor alignment or sizing issues</li>
+          <li>4-6: Layout partially working or inconsistent use of Flexbox</li>
+          <li>0-3: Minimal or incorrect Flexbox usage</li>
+        </ul>
+
+        <h3>3. CSS Syntax Accuracy (8 pts)</h3>
+        <ul>
+          <li>
+            7-8: Clean, correct selector and declaration syntax throughout
+          </li>
+          <li>5-6: Minor syntax issues that do not break layout</li>
+          <li>3-4: Multiple syntax errors that affect styling</li>
+          <li>0-2: Frequent or major syntax errors</li>
+        </ul>
+
+        <h3>4. CSS Combinators Usage (8 pts)</h3>
+        <ul>
+          <li>7-8: All four combinators used correctly and meaningfully</li>
+          <li>5-6: Three combinators used correctly or minor misuse</li>
+          <li>3-4: Two combinators used or several incorrect uses</li>
+          <li>0-2: Missing or incorrect combinator use</li>
+        </ul>
+
+        <h3>5. Responsiveness and Cleanliness (10 pts)</h3>
+        <ul>
+          <li>9-10: Clear responsive behavior with clean, organized code</li>
+          <li>6-8: Some responsiveness and mostly organized code</li>
+          <li>3-5: Minimal responsiveness or cluttered code</li>
+          <li>0-2: Not responsive and disorganized</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Important Notes</h2>
+        <ul>
+          <li>This is an individual activity.</li>
+          <li>Layout logic is more important than heavy styling.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

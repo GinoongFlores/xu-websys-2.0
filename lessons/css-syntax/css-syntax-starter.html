@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Syntax: Starter</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Understanding CSS Syntax</h1>
+      <p>Learn about declarations, blocks, rulesets, and statements</p>
+    </header>
+
+    <main>
+      <!-- Section 1: CSS Declarations -->
+      <section>
+        <h2>1. CSS Declarations</h2>
+        <p>
+          A declaration is a property-value pair separated by a colon. Every
+          declaration must end with a semicolon.
+        </p>
+
+        <p><strong>Syntax:</strong></p>
+        <pre>property: value;</pre>
+
+        <p><strong>Examples:</strong></p>
+        <pre>
+color: blue;
+font-size: 16px;
+margin: 10px;
+background: #fff;</pre
+        >
+
+        <!--
+          TODO: Try adding more declarations to the pre tag above.
+          Examples: padding, border, text-align, line-height
+        -->
+      </section>
+
+      <!-- Section 2: CSS Declaration Blocks -->
+      <section>
+        <h2>2. CSS Declaration Blocks</h2>
+        <p>
+          A declaration block is a group of declarations wrapped in curly braces
+          {}. Multiple declarations are separated by semicolons.
+        </p>
+
+        <p><strong>Syntax:</strong></p>
+        <pre>
+{
+  property1: value1;
+  property2: value2;
+  property3: value3;
+}</pre
+        >
+
+        <p><strong>Example:</strong></p>
+        <pre>
+{
+  color: white;
+  background: navy;
+  padding: 20px;
+}</pre
+        >
+
+        <!--
+          TODO: Add one more declaration to the example block above.
+          Try: border-radius, font-weight, or box-shadow
+        -->
+      </section>
+
+      <!-- Section 3: CSS Rulesets -->
+      <section>
+        <h2>3. CSS Rulesets</h2>
+        <p>
+          A ruleset combines a selector with a declaration block. It tells the
+          browser which elements to style and how to style them.
+        </p>
+
+        <p><strong>Syntax:</strong></p>
+        <pre>
+selector {
+  property: value;
+  property: value;
+}</pre
+        >
+
+        <p><strong>Examples:</strong></p>
+        <pre>
+/* Style paragraphs */
+p {
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Style a class */
+.button {
+  background: green;
+  color: white;
+  padding: 10px;
+}
+
+/* Style an ID */
+#header {
+  background: black;
+  color: white;
+}</pre
+        >
+
+        <!--
+          TODO: Add a new ruleset for a <div> with class="card".
+          Include declarations for: background, padding, border, margin
+        -->
+      </section>
+
+      <!-- Section 4: CSS Statements -->
+      <section>
+        <h2>4. CSS Statements</h2>
+        <p>A statement is a complete CSS instruction. There are two types:</p>
+
+        <h3>Type 1: Rulesets (Regular Rules)</h3>
+        <p>Selector + declaration block:</p>
+        <pre>
+/* A simple ruleset statement */
+h1 {
+  color: #667eea;
+  font-size: 2rem;
+}</pre
+        >
+
+        <h3>Type 2: At-Rules (@-rules)</h3>
+        <p>Special statements that start with @:</p>
+
+        <p><strong>Media Query (responsive design):</strong></p>
+        <pre>
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}</pre
+        >
+
+        <p><strong>Import (load external styles):</strong></p>
+        <pre>@import url('styles.css');</pre>
+
+        <!--
+          TODO: Add a comment explaining what an @-rule is in your own words.
+          Think about: "Why would you use @-rules instead of regular rulesets?"
+        -->
+      </section>
+
+      <!-- Section 5: Quick Reference -->
+      <section>
+        <h2>5. Quick Reference</h2>
+
+        <table border="1" cellpadding="10" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>What It Is</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Declaration</strong></td>
+              <td>Property-value pair</td>
+              <td><code>color: blue;</code></td>
+            </tr>
+            <tr>
+              <td><strong>Declaration Block</strong></td>
+              <td>Group of declarations in { }</td>
+              <td><code>{ color: blue; margin: 10px; }</code></td>
+            </tr>
+            <tr>
+              <td><strong>Ruleset</strong></td>
+              <td>Selector + declaration block</td>
+              <td><code>p { color: blue; }</code></td>
+            </tr>
+            <tr>
+              <td><strong>Statement</strong></td>
+              <td>Complete CSS instruction</td>
+              <td><code>p { ... }</code> or <code>@media ...</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section 6: Challenge -->
+      <section>
+        <h2>6. Your Challenge</h2>
+        <p>Look at the code examples above and answer these questions:</p>
+
+        <ol>
+          <li>
+            What's the difference between a declaration and a declaration block?
+          </li>
+          <li>Why do we need selectors in rulesets?</li>
+          <li>
+            Can you write a ruleset for a class called "highlight" that changes
+            the background color to yellow?
+          </li>
+          <li>When would you use an @-rule instead of a regular ruleset?</li>
+        </ol>
+
+        <!--
+          TODO: Write your answers here as comments or in a text document.
+          Try to explain each concept in your own words!
+        -->
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Reference:
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Syntax/Introduction"
+          >MDN CSS Syntax Introduction</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

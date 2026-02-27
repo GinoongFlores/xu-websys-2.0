@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Basics (Starter): Case, Entities, Whitespace</title>
+
+    <!--
+      STARTER VERSION (HTML-ONLY)
+      --------------------------
+      Goal: This file is meant for students to read + edit.
+
+      Rules for this starter file:
+      - No CSS (<style>) and no JavaScript (<script>)
+      - Use semantic HTML and clear comments
+      - Keep examples short and focused
+
+      Topics covered:
+      1) Case insensitivity
+      2) HTML entities
+      3) Whitespace behavior
+    -->
+  </head>
+
+  <body>
+    <header>
+      <h1>HTML Basics (Starter)</h1>
+      <p>
+        This page demonstrates <strong>case insensitivity</strong>,
+        <strong>HTML entities</strong>, and <strong>whitespace</strong> using
+        HTML only.
+      </p>
+    </header>
+
+    <main>
+      <!-- ==========================================================
+           1) CASE INSENSITIVITY
+           ========================================================== -->
+      <section aria-labelledby="case-title">
+        <h2 id="case-title">1) Case Insensitivity</h2>
+
+        <!--
+          Key idea:
+          - In HTML, tag names and attribute names are generally case-insensitive.
+            That means <p> and <P> are treated the same by the browser.
+
+          Best practice:
+          - Still write tags/attributes in lowercase for consistency and readability.
+        -->
+
+        <h3>Mixed-case HTML (works, but not recommended)</h3>
+        <!-- The browser will still render these correctly. -->
+        <DiV>
+          <P><StRoNg>This still renders correctly.</StRoNg></P>
+          <a HrEf="#entities-title">Jump to entities section</a>
+        </DiV>
+
+        <h3>Lowercase HTML (recommended)</h3>
+        <!-- Same content, but easier to read + maintain. -->
+        <div>
+          <p><strong>Same output, cleaner code.</strong></p>
+          <a href="#entities-title">Jump to entities section</a>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+           2) HTML ENTITIES
+           ========================================================== -->
+      <section aria-labelledby="entities-title">
+        <h2 id="entities-title">2) HTML Entities</h2>
+
+        <!--
+          Key idea:
+          Some characters are "reserved" in HTML.
+
+          - '<' and '>' look like the start/end of tags
+          - '&' begins an entity
+
+          If you want to show these characters as TEXT on a webpage,
+          you must use HTML entities.
+
+          Common entities:
+          - &lt;  shows '<'
+          - &gt;  shows '>'
+          - &amp; shows '&'
+          - &copy; shows '©'
+          - &#169; also shows '©' (numeric code)
+        -->
+
+        <p>
+          Show angle brackets as text: <code>&lt;div&gt;</code>
+        </p>
+        <p>
+          Show an ampersand as text: <code>Tom &amp; Jerry</code>
+        </p>
+        <p>
+          Copyright symbols: <code>&copy;</code> and <code>&#169;</code>
+        </p>
+
+        <!--
+          Tip:
+          If you try to type <div> directly in HTML, the browser thinks it's a tag.
+          So you must write: &lt;div&gt;.
+        -->
+      </section>
+
+      <!-- ==========================================================
+           3) WHITESPACE
+           ========================================================== -->
+      <section aria-labelledby="whitespace-title">
+        <h2 id="whitespace-title">3) Whitespace</h2>
+
+        <!--
+          Key idea:
+          By default, the browser collapses multiple spaces and new lines
+          into a single space.
+
+          That means this:
+          "Hello     world"
+          usually renders like:
+          "Hello world"
+
+          To PRESERVE spacing and line breaks, use the <pre> element.
+        -->
+
+        <h3>Collapsed whitespace (default)</h3>
+        <p>
+          Hello           world!
+          This line break becomes a space.
+          And these           extra spaces           collapse.
+        </p>
+
+        <h3>Preserved whitespace using &lt;pre&gt;</h3>
+        <!--
+          <pre> is "preformatted" text.
+          The browser preserves spaces and line breaks inside it.
+        -->
+        <pre>
+Line 1
+    Line 2 has 4 spaces before it
+Line 3
+        </pre>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Tip: Right-click → View Page Source to see the raw HTML.
+      </p>
+    </footer>
+  </body>
+</html>

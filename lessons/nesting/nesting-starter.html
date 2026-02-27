@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Nesting (Starter): Grouping Headings and Paragraphs</title>
+
+    <!--
+      STARTER VERSION (HTML-ONLY)
+      --------------------------
+      Goal: This file is meant for students to read + edit.
+
+      Rules for this starter file:
+      - No CSS (<style>) and no JavaScript (<script>)
+      - Use semantic HTML and clear comments
+      - Keep examples short and focused
+
+      Lesson focus:
+      - Why do we nest (group) content such as headings and paragraphs?
+
+      Real-world idea:
+      - A website is made of grouped parts (sections):
+        "Top Stories", "Announcements", "Contact", etc.
+      - Grouping makes it easier to understand, style, and update.
+    -->
+  </head>
+
+  <body>
+    <header>
+      <h1>HTML Nesting (Starter)</h1>
+      <p>
+        This page teaches why we <strong>nest</strong> (group) related content in
+        real websites.
+      </p>
+
+      <!--
+        Tip:
+        - Right-click → View Page Source to see the raw HTML.
+        - Notice how indentation helps humans see nesting.
+      -->
+    </header>
+
+    <main>
+      <!-- ==========================================================
+           1) WHAT NESTING MEANS
+           ========================================================== -->
+      <section aria-labelledby="meaning-title">
+        <h2 id="meaning-title">1) What does “nesting” mean?</h2>
+
+        <!--
+          Key idea:
+          - Nesting means placing one element inside another element.
+
+          Why we do it:
+          - It shows relationships: what belongs together.
+
+          Example:
+          - A <section> groups content about ONE topic.
+          - Inside it, we put the heading + paragraphs for that topic.
+        -->
+
+        <section aria-labelledby="shipping-title">
+          <h3 id="shipping-title">Shipping Info (example group)</h3>
+          <p>Orders arrive in 3–5 business days.</p>
+          <p>Tracking is emailed after checkout.</p>
+        </section>
+
+        <!--
+          Notice:
+          - The <h3> and <p> tags are "inside" the group (the section).
+          - That tells us those paragraphs belong to that shipping topic.
+        -->
+      </section>
+
+      <!-- ==========================================================
+           2) REAL-WORLD SCENARIO
+           ========================================================== -->
+      <section aria-labelledby="real-world-title">
+        <h2 id="real-world-title">2) Real-world scenario: a simple homepage</h2>
+
+        <!--
+          Imagine a school news homepage.
+
+          A real homepage often has grouped areas like:
+          - Top Stories
+          - Announcements
+          - Contact
+
+          We'll use:
+          - <section> for each area (group)
+          - <article> for each story (a standalone content item)
+        -->
+
+        <section aria-labelledby="top-stories-title">
+          <h3 id="top-stories-title">Top Stories</h3>
+
+          <!--
+            Each <article> is one story.
+            It has its own heading and supporting paragraph.
+          -->
+          <article aria-labelledby="story-1-title">
+            <h4 id="story-1-title">New Library Hours</h4>
+            <p>The library is now open until 7PM on weekdays.</p>
+          </article>
+
+          <article aria-labelledby="story-2-title">
+            <h4 id="story-2-title">Intramurals Sign-Up</h4>
+            <p>Join basketball or volleyball. Registration ends Friday.</p>
+          </article>
+
+          <!--
+            Student task:
+            - Add a THIRD <article> here.
+            - Give it an <h4> title and a <p> description.
+          -->
+        </section>
+
+        <section aria-labelledby="announcements-title">
+          <h3 id="announcements-title">Announcements</h3>
+          <p>
+            Midterm week starts next Monday. Check your schedule and room
+            assignments.
+          </p>
+        </section>
+
+        <section aria-labelledby="contact-title">
+          <h3 id="contact-title">Contact</h3>
+          <p>Email: registrar@example.com</p>
+          <p>Office Hours: 9AM–4PM</p>
+        </section>
+      </section>
+
+      <!-- ==========================================================
+           3) WHY GROUPING HELPS
+           ========================================================== -->
+      <section aria-labelledby="why-title">
+        <h2 id="why-title">3) Why grouping is useful (in real websites)</h2>
+
+        <!--
+          Students often ask:
+          "Why not just write headings and paragraphs in a row?"
+
+          You CAN do that, but grouping helps:
+          1) Readability: You can see what belongs together.
+          2) Styling: You can style one area without affecting another.
+          3) Accessibility: Screen readers can navigate by sections/headings.
+          4) Maintenance: It's easier to move or delete a whole group.
+        -->
+
+        <h3>Ungrouped (flat) example</h3>
+        <!--
+          Problem:
+          - It's harder to see which paragraphs belong to which heading.
+          - It is harder to move one "topic" as a single unit.
+        -->
+        <h4>Top Stories</h4>
+        <h5>New Library Hours</h5>
+        <p>The library is now open until 7PM on weekdays.</p>
+        <h5>Intramurals Sign-Up</h5>
+        <p>Join basketball or volleyball. Registration ends Friday.</p>
+
+        <h3>Grouped (nested) example</h3>
+        <!--
+          Better:
+          - One <section> groups everything about Top Stories.
+          - Each story is its own <article>.
+        -->
+        <section aria-labelledby="grouped-title">
+          <h4 id="grouped-title">Top Stories (grouped)</h4>
+
+          <article>
+            <h5>New Library Hours</h5>
+            <p>The library is now open until 7PM on weekdays.</p>
+          </article>
+
+          <article>
+            <h5>Intramurals Sign-Up</h5>
+            <p>Join basketball or volleyball. Registration ends Friday.</p>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Practice:
+        Try creating a new group called <strong>Events</strong> using
+        <code>&lt;section&gt;</code>, then add 2 <code>&lt;article&gt;</code>
+        items inside it.
+      </p>
+    </footer>
+  </body>
+</html>

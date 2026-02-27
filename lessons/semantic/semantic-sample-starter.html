@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic Sample Blog (Starter)</title>
+
+    <!--
+      STARTER VERSION (HTML-ONLY)
+      --------------------------
+      Goal: Practice building a "real website" structure with semantic tags.
+
+      Rules for this starter file:
+      - No CSS (<style>) and no JavaScript (<script>)
+      - Use semantic HTML and clear comments
+      - Keep it simple, but realistic
+
+      Tags to practice:
+      - <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>
+
+      Tip:
+      - Semantic tags add MEANING (structure), not automatic styling.
+    -->
+  </head>
+
+  <body>
+    <!--
+      Accessibility tip:
+      A "skip link" helps keyboard users jump straight to <main>.
+    -->
+    <a href="#main">Skip to main content</a>
+
+    <!-- ==========================================================
+         SITE HEADER
+         ========================================================== -->
+    <header>
+      <!--
+        Use <header> for branding and introduction.
+        This is a site-level header.
+      -->
+      <h1>Flo’s Learning Log</h1>
+      <p>A sample blog structure for learning semantic layout tags.</p>
+
+      <!--
+        Use <nav> for your primary navigation links.
+        Best practice: use clear link text.
+      -->
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#posts">Latest posts</a></li>
+          <li><a href="#topics">Topics</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ==========================================================
+         MAIN CONTENT
+         ========================================================== -->
+    <main id="main">
+      <!--
+        Use <main> for the unique, central content of the page.
+        Best practice: usually only one <main> per page.
+      -->
+
+      <!--
+        Use <section> for a themed group of content with a heading.
+        Example theme: upcoming events.
+      -->
+      <section id="posts" aria-labelledby="posts-title">
+        <h2 id="posts-title">Latest posts</h2>
+        <p>This section groups all blog post previews.</p>
+
+        <!--
+          Use <article> for content that can stand alone.
+          Example: an event card.
+        -->
+        <article aria-labelledby="post-1-title">
+          <h3 id="post-1-title">What makes HTML “semantic”?</h3>
+          <p>
+            A beginner-friendly note about tags like
+            <code>&lt;nav&gt;</code> and <code>&lt;article&gt;</code>.
+          </p>
+          <p><strong>Published:</strong> Feb 13, 2026</p>
+        </article>
+
+        <article aria-labelledby="post-2-title">
+          <h3 id="post-2-title">My first layout with CSS Grid</h3>
+          <p>
+            A quick learning note: how I used rows and columns to build a simple
+            blog layout.
+          </p>
+          <p><strong>Published:</strong> Feb 10, 2026</p>
+        </article>
+      </section>
+
+      <!--
+        Another <section> for another theme.
+        Example theme: reading recommendations.
+      -->
+      <section id="topics" aria-labelledby="topics-title">
+        <h2 id="topics-title">Topics I’m learning</h2>
+        <ul>
+          <li>Semantic HTML</li>
+          <li>Forms</li>
+          <li>CSS Layout (Flexbox + Grid)</li>
+        </ul>
+      </section>
+
+      <!--
+        Use <aside> for related (supporting) content.
+        This is usually NOT the main focus.
+      -->
+      <aside id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About the author</h2>
+        <p>
+          This is related information (not the main content), so it belongs in
+          an
+          <code>&lt;aside&gt;</code>.
+        </p>
+        <ul>
+          <li><a href="#posts">Jump to latest posts</a></li>
+          <li><a href="#topics">Jump to topics</a></li>
+        </ul>
+
+        <p>
+          Ask yourself: “Is this essential to the page?” If not, it may belong
+          in an <code>&lt;aside&gt;</code>.
+        </p>
+      </aside>
+    </main>
+
+    <!-- ==========================================================
+         SITE FOOTER
+         ========================================================== -->
+    <footer>
+      <!--
+        Use <footer> for footer information.
+        Examples: copyright, policies, contact info.
+      -->
+      <p>© 2026 Flo’s Learning Log</p>
+      <p>Contact: hello@example.com</p>
+    </footer>
+  </body>
+</html>

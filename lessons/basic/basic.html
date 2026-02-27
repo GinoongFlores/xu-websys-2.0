@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Basics: Case, Entities, Whitespace</title>
+
+    <!--
+      This page is designed to teach three foundational HTML ideas:
+      1) Case Insensitivity
+      2) HTML Entities
+      3) Whitespaces
+
+      NOTE:
+      - We keep HTML, CSS, and JS in distinct sections.
+      - We add comments that explain what and why for beginners.
+    -->
+
+    <style>
+      /*
+        Step 1: Add a tiny bit of styling to make examples easy to read.
+        We are NOT focusing on design here; we are focusing on learning.
+      */
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.5;
+        margin: 0;
+        padding: 24px;
+      }
+
+      header,
+      main,
+      footer {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 24px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+      }
+
+      section {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+
+      .example-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .box {
+        border: 1px dashed #aaa;
+        border-radius: 8px;
+        padding: 12px;
+        background: #fafafa;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+      }
+
+      pre {
+        margin: 0;
+        padding: 12px;
+        border-radius: 8px;
+        background: #111;
+        color: #f3f3f3;
+        overflow: auto;
+      }
+
+      .note {
+        margin-top: 10px;
+        font-size: 0.95rem;
+        color: #333;
+      }
+
+      /*
+        We use these classes to demonstrate whitespace behavior.
+      */
+      .collapsed {
+        /* Default HTML behavior: whitespace collapses */
+        white-space: normal;
+      }
+
+      .preserved {
+        /* This CSS tells the browser: keep spaces and line breaks */
+        white-space: pre-wrap;
+        background: #fff;
+      }
+
+      @media (max-width: 720px) {
+        .example-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>HTML Basics: Case, Entities, and Whitespace</h1>
+      <p>
+        This page contains small, focused examples. Open DevTools Console to see
+        extra logs.
+      </p>
+    </header>
+
+    <main>
+      <section aria-labelledby="case-title">
+        <ol></ol>
+        <h2 id="case-title">1) Case Insensitivity</h2>
+
+        <!--
+          Key idea:
+          HTML is generally case-insensitive for tag names and attribute names.
+          That means <p>, <P>, and <p> will be understood the same by the browser.
+
+          Best practice:
+          - Use lowercase tags and attributes for consistency and readability.
+
+          IMPORTANT NOTE:
+          - While HTML is case-insensitive, CSS class names and IDs are treated as
+            case-sensitive in many contexts and you should keep them consistent.
+        -->
+
+        <div class="example-row">
+          <div class="box">
+            <h3>Mixed-case HTML (works)</h3>
+
+            <!--
+              The browser will render these tags normally even though the tag
+              names and attribute names are written with mixed capitalization.
+            -->
+            <div>
+              <p><strong>Browsers still render this correctly.</strong></p>
+              <a href="#entities-title">This link still works</a>
+            </div>
+
+            <p class="note">Even though this is valid, it’s harder to read.</p>
+          </div>
+
+          <div class="box">
+            <h3>Lowercase HTML (recommended)</h3>
+
+            <!--
+              Same content, but written in the recommended style: lowercase.
+            -->
+            <div>
+              <p><strong>Same output, cleaner code.</strong></p>
+              <a href="#entities-title">This link works too</a>
+            </div>
+
+            <p class="note">
+              Your future self (and your classmates) will thank you.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="entities-title">
+        <h2 id="entities-title">2) HTML Entities</h2>
+
+        <!--
+          Key idea:
+          Some characters have special meaning in HTML.
+
+          - The < and > characters look like tags.
+          - The & character starts an entity.
+
+          To display those characters as text, we use HTML entities.
+
+          Examples:
+          - &lt; shows '<'
+          - &gt; shows '>'
+          - &amp; shows '&'
+          - &copy; shows '©'
+          - &#169; is another way to show '©' using its numeric code
+        -->
+
+        <div class="example-row">
+          <div class="box">
+            <h3>Rendered output</h3>
+            <p>We can show angle brackets: <code>&lt;div&gt;</code></p>
+
+            <p>We can show ampersands: <code>Tom &amp; Jerry</code></p>
+            <p>
+              Copyright symbol: <code>&copy;</code> (also: <code>&#169;</code>)
+            </p>
+            <p class="note">Entities make sure your text displays correctly.</p>
+          </div>
+
+          <div class="box">
+            <h3>What the HTML looks like</h3>
+            <pre>
+&lt;p&gt;We can show angle brackets: &amp;lt;div&amp;gt;&lt;/p&gt;
+&lt;p&gt;We can show ampersands: Tom &amp;amp; Jerry&lt;/p&gt;
+&lt;p&gt;Copyright: &amp;copy; (also: &amp;#169;)&lt;/p&gt;</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="whitespace-title">
+        <h2 id="whitespace-title">3) Whitespaces</h2>
+
+        <!--
+          Key idea:
+          Browsers usually collapse multiple spaces, tabs, and line breaks into ONE space.
+
+          That means:
+          - "Hello     world" renders like "Hello world".
+          - New lines also become spaces.
+
+          If you need to preserve whitespace (like code or poems), you can use:
+          - The <pre> tag (preformatted text)
+          - CSS property: white-space
+        -->
+
+        <div class="example-row">
+          <div class="box">
+            <h3>Collapsed whitespace (default)</h3>
+
+            <!--
+              Even though we put many spaces and new lines here,
+              the browser will collapse them.
+            -->
+            <p class="collapsed" id="collapsed-example">
+              Hello world! This line break will become a space. And these extra
+              spaces will collapse.
+            </p>
+
+            <p class="note">Look closely: you’ll see normal spacing only.</p>
+          </div>
+
+          <div class="box">
+            <h3>Preserved whitespace (CSS: white-space)</h3>
+
+            <!--
+              The same text, but we use CSS white-space: pre-wrap to preserve
+              spaces and line breaks while still wrapping long lines.
+            -->
+            <p class="preserved" id="preserved-example">
+              Hello world! This line break stays a line break. And these extra
+              spaces stay.
+            </p>
+
+            <p class="note">
+              This is useful for showing code, lyrics, or formatting.
+            </p>
+          </div>
+        </div>
+
+        <div class="box" style="margin-top: 12px">
+          <h3>Using the &lt;pre&gt; element</h3>
+
+          <!--
+            The <pre> element preserves whitespace by default.
+            It is commonly used for code blocks.
+          -->
+          <pre id="pre-example">
+Line 1
+    Line 2 has 4 spaces before it
+Line 3</pre
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Tip: Right-click → View Page Source to see the raw HTML.</p>
+    </footer>
+
+    <script>
+      // Step 1: Grab a few elements so we can talk about what the browser renders.
+      const collapsedExample = document.querySelector("#collapsed-example");
+      const preservedExample = document.querySelector("#preserved-example");
+
+      // Step 2: Log what the browser "sees" as rendered text.
+      // textContent keeps the original whitespace; innerText is closer to what you see on screen.
+      console.log("--- Whitespace Demo ---");
+      console.log(
+        "collapsedExample.textContent:",
+        JSON.stringify(collapsedExample.textContent),
+      );
+      console.log(
+        "collapsedExample.innerText  :",
+        JSON.stringify(collapsedExample.innerText),
+      );
+      console.log(
+        "preservedExample.textContent:",
+        JSON.stringify(preservedExample.textContent),
+      );
+      console.log(
+        "preservedExample.innerText  :",
+        JSON.stringify(preservedExample.innerText),
+      );
+
+      // Step 3: Friendly reminder for students.
+      console.log(
+        "Reminder: HTML tags/attributes are case-insensitive, but keep code lowercase for consistency.",
+      );
+      console.log(
+        "Reminder: Use entities like &lt; &gt; &amp; when you need to display reserved characters.",
+      );
+    </script>
+  </body>
+</html>

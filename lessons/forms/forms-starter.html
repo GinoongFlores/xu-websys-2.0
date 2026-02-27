@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Forms (Starter): Labels, Uploads, Validation, Constraints</title>
+
+    <!--
+      STARTER VERSION (HTML-ONLY)
+      --------------------------
+      Goal: This file is meant for students to read + edit.
+
+      Rules for this starter file:
+      - No CSS (<style>) and no JavaScript (<script>)
+      - Use semantic HTML and clear comments
+      - Keep examples short and focused
+
+      Topics covered:
+      1) Labels and inputs
+      2) File uploads
+      3) Built-in form validation
+      4) HTML form constraints
+
+      Note:
+      - With HTML-only, we cannot "print" the collected values on the page.
+      - The main learning goal is seeing the browser's validation messages.
+    -->
+  </head>
+
+  <body>
+    <header>
+      <h1>HTML Forms (Starter)</h1>
+      <p>
+        Try clicking <strong>Submit</strong> with empty/invalid fields.
+        The browser will show built-in validation messages.
+      </p>
+    </header>
+
+    <main>
+      <!-- ==========================================================
+           1) LABELS + INPUTS
+           ========================================================== -->
+      <section aria-labelledby="labels-title">
+        <h2 id="labels-title">1) Labels and Inputs</h2>
+
+        <!--
+          Key idea:
+          A <label> describes an input.
+
+          Accessibility benefit:
+          - Clicking the label focuses the input.
+          - Screen readers can announce the label for the input.
+
+          How to connect them:
+          - Give the input an id="..."
+          - Give the label a for="same-id"
+        -->
+        <p>
+          In the form below, every input has a matching <code>&lt;label&gt;</code>.
+        </p>
+      </section>
+
+      <!-- ==========================================================
+           2) FILE UPLOADS
+           ========================================================== -->
+      <section aria-labelledby="uploads-title">
+        <h2 id="uploads-title">2) File Uploads</h2>
+
+        <!--
+          Key idea:
+          File upload is done with: <input type="file">
+
+          Useful attributes:
+          - accept="image/*" (only allow images)
+          - multiple (choose more than one file)
+
+          IMPORTANT:
+          - Uploading needs a server to actually store the file.
+          - Here we are only demonstrating the HTML input.
+        -->
+        <p>
+          Choose an image file. (Nothing will be uploaded unless you have a server.)
+        </p>
+      </section>
+
+      <!-- ==========================================================
+           3) VALIDATION + CONSTRAINTS
+           ========================================================== -->
+      <section aria-labelledby="constraints-title">
+        <h2 id="constraints-title">3) Form Validation and Constraints</h2>
+
+        <!--
+          Key idea:
+          HTML has built-in validation. The browser checks constraints BEFORE
+          the form submits.
+
+          Examples of constraints:
+          - required
+          - type="email"
+          - minlength / maxlength
+          - min / max (numbers and dates)
+          - pattern (a rule the text must match)
+        -->
+
+        <!--
+          Important note for local files:
+          - If you open this page as a file (file://), pressing Submit may try
+            to "submit" and then the browser may block it or reload.
+          - That's OK for this lesson: your goal is to see the validation UI.
+        -->
+        <form action="" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>Student Registration (Demo)</legend>
+
+            <!-- FULL NAME: required + minlength + maxlength -->
+            <p>
+              <label for="full-name">Full Name (required)</label><br />
+              <input
+                id="full-name"
+                name="fullName"
+                type="text"
+                required
+                minlength="2"
+                maxlength="40"
+                placeholder="e.g., Juan Dela Cruz"
+                autocomplete="name"
+              />
+              <!-- Constraints explained for students -->
+              <br />
+              <small>
+                Constraints: <code>required</code>, <code>minlength</code>,
+                <code>maxlength</code>
+              </small>
+            </p>
+
+            <!-- EMAIL: type=email + required -->
+            <p>
+              <label for="email">Email (required)</label><br />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="e.g., student@example.com"
+                autocomplete="email"
+              />
+              <br />
+              <small>Constraint: <code>type="email"</code> + <code>required</code></small>
+            </p>
+
+            <!-- AGE: min + max + step -->
+            <p>
+              <label for="age">Age (number constraints)</label><br />
+              <input
+                id="age"
+                name="age"
+                type="number"
+                min="13"
+                max="99"
+                step="1"
+                placeholder="13 to 99"
+              />
+              <br />
+              <small>Constraints: <code>min</code>, <code>max</code>, <code>step</code></small>
+            </p>
+
+            <!-- BIRTHDATE: min + max dates -->
+            <p>
+              <label for="birthdate">Birthdate (date constraints)</label><br />
+              <input
+                id="birthdate"
+                name="birthdate"
+                type="date"
+                min="1900-01-01"
+                max="2026-12-31"
+              />
+              <br />
+              <small>Constraints: <code>min</code>, <code>max</code> (dates)</small>
+            </p>
+
+            <!-- PASSWORD: required + minlength -->
+            <p>
+              <label for="password">Password (required)</label><br />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                minlength="8"
+                placeholder="At least 8 characters"
+                autocomplete="new-password"
+              />
+              <br />
+              <small>Constraint: <code>minlength="8"</code></small>
+            </p>
+
+            <!-- STUDENT ID: pattern -->
+            <p>
+              <label for="student-id">Student ID (pattern constraint)</label><br />
+              <input
+                id="student-id"
+                name="studentId"
+                type="text"
+                pattern="[A-Z]{2}-[0-9]{4}"
+                placeholder="Format: AB-1234"
+              />
+              <br />
+              <small>
+                Constraint: <code>pattern="[A-Z]{2}-[0-9]{4}"</code>
+              </small>
+            </p>
+
+            <!-- PROFILE PHOTO: file input + accept -->
+            <p>
+              <label for="profile-photo">Profile Photo (file upload)</label><br />
+              <input
+                id="profile-photo"
+                name="profilePhoto"
+                type="file"
+                accept="image/*"
+              />
+              <br />
+              <small>File input: <code>type="file"</code> + <code>accept="image/*"</code></small>
+            </p>
+
+            <!-- MESSAGE: textarea + maxlength -->
+            <p>
+              <label for="message">Message (optional textarea)</label><br />
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                maxlength="200"
+                placeholder="Write up to 200 characters..."
+              ></textarea>
+              <br />
+              <small>Constraint: <code>maxlength="200"</code></small>
+            </p>
+
+            <!-- Submit triggers browser validation UI -->
+            <p>
+              <button type="submit">Submit</button>
+              <button type="reset">Reset</button>
+            </p>
+          </fieldset>
+        </form>
+
+        <p>
+          Practice ideas:
+        </p>
+        <ul>
+          <li>Leave required fields empty, then click Submit.</li>
+          <li>Type an invalid email (example: <code>hello</code>), then Submit.</li>
+          <li>Try Student ID: <code>AB-1234</code> (valid) vs <code>ab-1234</code> (invalid).</li>
+          <li>Try a short password (&lt; 8 characters).</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Next step: once you understand the HTML constraints, we can add CSS for
+        layout and JavaScript for custom validation messages.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic Layout Tags: header, nav, main, section, article, aside, footer</title>
+
+    <!--
+      This lesson teaches common SEMANTIC layout tags.
+
+      Goal:
+      - Understand what each tag means
+      - See how they fit together in a typical page layout
+
+      Tags covered:
+      - <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>
+
+      Note:
+      - Semantic tags do NOT automatically change the look of your page.
+      - They add meaning/structure so humans, browsers, and screen readers
+        understand your page better.
+
+      We keep HTML, CSS, and JS in distinct sections.
+    -->
+
+    <style>
+      /*
+        Step 1: Small styling to make the layout easy to see.
+        This is still a learning page, not a design project.
+      */
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        line-height: 1.5;
+        margin: 0;
+        padding: 24px;
+      }
+
+      header,
+      main,
+      footer {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 18px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 12px;
+        padding: 10px 12px;
+        border: 1px solid #111;
+        border-radius: 8px;
+        background: #fff;
+        color: #111;
+        text-decoration: none;
+      }
+
+      .skip-link:focus {
+        left: 24px;
+      }
+
+      section {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+
+      .layout-demo {
+        /*
+          Step 2: This grid visually resembles a common page layout.
+          Each box is a REAL semantic element.
+        */
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .tag-box {
+        border: 2px solid #111;
+        border-radius: 12px;
+        padding: 12px;
+        background: #fafafa;
+      }
+
+      .tag-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 0 0 8px;
+      }
+
+      .tag-title code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+        padding: 2px 6px;
+        border: 1px solid #111;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .tag-title small {
+        color: #333;
+      }
+
+      .layout-main {
+        /*
+          Step 3: Inside <main>, we commonly see:
+          - a content column (section/article)
+          - an aside column (related info)
+        */
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 12px;
+      }
+
+      .content-col {
+        display: grid;
+        gap: 12px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .nav-links a {
+        display: inline-block;
+        padding: 8px 10px;
+        border: 1px solid #111;
+        border-radius: 8px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+
+      .tip {
+        margin-top: 10px;
+        color: #333;
+        font-size: 0.95rem;
+      }
+
+      pre {
+        margin: 0;
+        padding: 12px;
+        border-radius: 10px;
+        background: #111;
+        color: #f3f3f3;
+        overflow: auto;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+      }
+
+      .click-hint {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #333;
+      }
+
+      .clickable {
+        cursor: pointer;
+      }
+
+      @media (max-width: 800px) {
+        .layout-main {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--
+      Accessibility tip:
+      A "skip to main content" link helps keyboard users.
+    -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ==========================================================
+         PAGE HEADER (site-level)
+         ========================================================== -->
+    <header class="tag-box clickable" data-tag="header">
+      <h1 class="tag-title">
+        <span>Semantic Layout Tags</span>
+        <code>&lt;header&gt;</code>
+      </h1>
+      <p>
+        A <strong>header</strong> usually contains the site/page title, logo, or
+        introduction. You can have a header for the page, and also headers inside
+        sections/articles.
+      </p>
+      <p class="click-hint">
+        Tip: Click boxes to log which semantic tag you clicked.
+      </p>
+    </header>
+
+    <main id="main">
+      <!-- ==========================================================
+           QUICK DEFINITIONS
+           ========================================================== -->
+      <section aria-labelledby="definitions-title">
+        <h2 id="definitions-title">What do these tags mean?</h2>
+
+        <!--
+          Key idea:
+          - Semantic tags describe the ROLE of content.
+          - They do not automatically style your page.
+        -->
+        <ul>
+          <li><code>&lt;nav&gt;</code> = main navigation links</li>
+          <li><code>&lt;main&gt;</code> = the main unique content of the page (usually only one)</li>
+          <li><code>&lt;section&gt;</code> = a themed group of content with a heading</li>
+          <li><code>&lt;article&gt;</code> = a self-contained piece of content that could stand alone</li>
+          <li><code>&lt;aside&gt;</code> = related content (sidebar, notes, links)</li>
+          <li><code>&lt;footer&gt;</code> = footer info (copyright, contacts, related links)</li>
+        </ul>
+
+        <p class="tip">
+          Quick question to ask yourself: “Could I move this somewhere else and it
+          still makes sense?” If yes, it might be an <code>&lt;article&gt;</code>.
+        </p>
+      </section>
+
+      <!-- ==========================================================
+           LAYOUT DEMO (real semantic elements)
+           ========================================================== -->
+      <section aria-labelledby="demo-title">
+        <h2 id="demo-title">Layout demo</h2>
+
+        <div class="layout-demo">
+          <!-- NAVIGATION -->
+          <nav class="tag-box clickable" aria-label="Primary" data-tag="nav">
+            <h3 class="tag-title">
+              <span>Primary navigation</span>
+              <code>&lt;nav&gt;</code>
+            </h3>
+
+            <!--
+              Best practice:
+              - Put your main site links in <nav>.
+              - Use clear link text.
+            -->
+            <ul class="nav-links">
+              <li><a href="#demo-title">Layout demo</a></li>
+              <li><a href="#section-example">Section example</a></li>
+              <li><a href="#article-example">Article example</a></li>
+            </ul>
+          </nav>
+
+          <!-- MAIN CONTENT AREA -->
+          <div class="layout-main">
+            <div class="content-col">
+              <section
+                id="section-example"
+                class="tag-box clickable"
+                aria-labelledby="section-title"
+                data-tag="section"
+              >
+                <h3 id="section-title" class="tag-title">
+                  <span>A themed group of content</span>
+                  <code>&lt;section&gt;</code>
+                </h3>
+                <p>
+                  Use a <strong>section</strong> when you have a chunk of content
+                  that belongs together under a heading.
+                </p>
+              </section>
+
+              <article
+                id="article-example"
+                class="tag-box clickable"
+                aria-labelledby="article-title"
+                data-tag="article"
+              >
+                <h3 id="article-title" class="tag-title">
+                  <span>A self-contained post</span>
+                  <code>&lt;article&gt;</code>
+                </h3>
+                <p>
+                  An <strong>article</strong> is content that can stand on its own.
+                  Examples: a news story, a blog post, a product card.
+                </p>
+                <p class="tip">
+                  Articles often have their own headings, author info, and dates.
+                </p>
+              </article>
+
+              <section class="tag-box" aria-labelledby="code-title">
+                <h3 id="code-title">A tiny example structure</h3>
+                <pre><code>&lt;header&gt;
+  &lt;h1&gt;Site Title&lt;/h1&gt;
+  &lt;nav&gt;...links...&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Topic&lt;/h2&gt;
+    &lt;article&gt;A standalone post&lt;/article&gt;
+  &lt;/section&gt;
+
+  &lt;aside&gt;Related links&lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;Copyright&lt;/footer&gt;</code></pre>
+              </section>
+            </div>
+
+            <!-- ASIDE (related content) -->
+            <aside class="tag-box clickable" aria-labelledby="aside-title" data-tag="aside">
+              <h3 id="aside-title" class="tag-title">
+                <span>Related info</span>
+                <code>&lt;aside&gt;</code>
+              </h3>
+              <p>
+                An <strong>aside</strong> is for content that is related but not
+                the main focus.
+              </p>
+              <ul>
+                <li>Definitions</li>
+                <li>Helpful links</li>
+                <li>Notes / tips</li>
+              </ul>
+            </aside>
+          </div>
+
+          <!-- FOOTER -->
+          <footer class="tag-box clickable" data-tag="footer">
+            <h3 class="tag-title">
+              <span>Page footer</span>
+              <code>&lt;footer&gt;</code>
+            </h3>
+            <p>
+              A footer often contains copyright, contact info, or extra links.
+            </p>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Step 1: Select all boxes that represent semantic tags
+      const semanticBoxes = document.querySelectorAll("[data-tag]");
+
+      // Step 2: Log clicks so students can connect the UI to the tag names
+      function handleSemanticBoxClick(event) {
+        const clickedElement = event.currentTarget;
+        const tagName = clickedElement.dataset.tag;
+
+        console.log(`You clicked the <${tagName}> region.`);
+      }
+
+      // Step 3: Attach listeners
+      semanticBoxes.forEach((box) => {
+        box.addEventListener("click", handleSemanticBoxClick);
+      });
+    </script>
+  </body>
+</html>

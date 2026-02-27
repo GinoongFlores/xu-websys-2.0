@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedding Media (Starter): Images, Audio, Video, iframe</title>
+
+    <!--
+      STARTER FILE (HTML ONLY)
+
+      Goal:
+      - Practice embedding media using ONLY HTML.
+
+      Rules for this starter:
+      - Do NOT add <style> or <script> here.
+      - Focus on learning the HTML tags and attributes.
+
+      Topics:
+      - Images (<img>)
+      - Audio (<audio>)
+      - Video (<video>)
+      - iFrame (<iframe>)
+      - CSP (explained in comments)
+    -->
+  </head>
+
+  <body>
+    <header>
+      <h1>Embedding Media (Starter)</h1>
+      <p>
+        This page is intentionally plain. Your job is to edit the HTML tags and
+        attributes to see how embedding works.
+      </p>
+    </header>
+
+    <main>
+      <section aria-labelledby="images-title">
+        <h2 id="images-title">1) Images: <code>&lt;img&gt;</code></h2>
+
+        <!--
+          TASK:
+          - Replace the src URL with another image URL.
+          - Rewrite the alt text to describe your image.
+
+          REMINDER:
+          - <img> does NOT have a closing tag.
+          - alt="..." is required for accessibility.
+        -->
+
+        <figure>
+          <img
+            src="https://picsum.photos/id/237/900/500"
+            alt="A dog photo used as a placeholder"
+            width="900"
+            height="500"
+            loading="lazy"
+          />
+          <figcaption>
+            Edit the <code>src</code> and <code>alt</code> attributes.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="audio-title">
+        <h2 id="audio-title">2) Audio: <code>&lt;audio&gt;</code></h2>
+
+        <!--
+          TASK:
+          - Add the loop attribute.
+          - Try adding muted.
+
+          TIP:
+          - controls shows a built-in UI.
+        -->
+
+        <audio controls preload="metadata">
+          <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </section>
+
+      <section aria-labelledby="video-title">
+        <h2 id="video-title">3) Video: <code>&lt;video&gt;</code></h2>
+
+        <!--
+          TASK:
+          - Add a poster="..." image URL.
+          - Try adding muted.
+
+          NOTE:
+          - autoplay is often blocked unless the video is muted.
+        -->
+
+        <video controls preload="metadata" playsinline width="640">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+          Your browser does not support the video element.
+        </video>
+      </section>
+
+      <section aria-labelledby="iframe-title">
+        <h2 id="iframe-title">4) iFrame: <code>&lt;iframe&gt;</code></h2>
+
+        <!--
+          TASK:
+          - Replace the iframe src with a different embed link.
+
+          IMPORTANT:
+          - Some sites block embedding in iframes.
+          - Always add title="..." for accessibility.
+
+          SECURITY TIP:
+          - sandbox can limit what an embedded page can do.
+        -->
+
+        <iframe
+          title="Embedded OpenStreetMap view"
+          width="560"
+          height="420"
+          loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=120.971%2C14.571%2C120.986%2C14.583&amp;layer=mapnik"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+        ></iframe>
+      </section>
+
+      <section aria-labelledby="csp-title">
+        <h2 id="csp-title">5) CSP Basics (Concept Only)</h2>
+
+        <!--
+          CSP = Content Security Policy
+
+          Simple explanation:
+          - CSP is a browser security rule that controls what your page is allowed to load.
+
+          Easy analogy (remember this!):
+          - Your website is a school event.
+          - The browser is the guard.
+          - CSP is the guest list.
+          If a resource is not on the guest list, the browser blocks it.
+
+          Why students should care:
+          - Your image/audio/video/iframe may fail to load if CSP blocks it.
+
+          IMPORTANT:
+          - Real CSP is usually set on the SERVER as an HTTP header.
+          - If you are just opening this file in a browser, you are not truly
+            setting server headers.
+
+          Common CSP directives (cheat sheet):
+          - default-src = default rule for most resources
+          - img-src = where images can load from
+          - media-src = where audio/video can load from
+          - frame-src = which sites can be embedded with <iframe>
+        -->
+
+        <p>
+          If an embed fails, open DevTools Console and look for an error message.
+        </p>
+
+        <p>
+          If you see errors like “Refused to load ... because of Content Security Policy”,
+          it usually means the page’s CSP did not allow that domain.
+        </p>
+      </section>
+
+      <section aria-labelledby="practice-title">
+        <h2 id="practice-title">Practice checklist</h2>
+        <ol>
+          <li>Change the image <code>src</code> and <code>alt</code>.</li>
+          <li>Add <code>loop</code> to the audio element.</li>
+          <li>Add a <code>poster</code> to the video element.</li>
+          <li>Embed a different site/video using an iframe.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Reminder: This starter file is HTML-only on purpose.
+      </p>
+    </footer>
+  </body>
+</html>

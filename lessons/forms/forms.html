@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Forms: Labels, Uploads, Validation, Constraints</title>
+
+    <!--
+      This page is designed to teach four form topics:
+      1) Labels and Inputs
+      2) File Uploads
+      3) Form Validation
+      4) HTML Form Constraints
+
+      We use:
+      - Semantic HTML structure
+      - Clear comments for each concept
+      - Minimal CSS for readability
+      - Small JavaScript to demonstrate validation behavior
+
+      Note for students:
+      - This page does NOT send data to a server.
+      - We prevent the form from actually submitting so we can inspect data safely.
+    -->
+
+    <style>
+      /* Step 1: Basic readability styles */
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.5;
+        margin: 0;
+        padding: 24px;
+      }
+
+      header,
+      main,
+      footer {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 18px;
+      }
+
+      section {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+
+      label {
+        font-weight: 600;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        font: inherit;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #aaa;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 2px solid #000;
+        outline-offset: 2px;
+      }
+
+      .help {
+        color: #333;
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      button {
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid #111;
+        background: #111;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #fff;
+        color: #111;
+      }
+
+      .result {
+        padding: 12px;
+        border: 1px dashed #aaa;
+        border-radius: 8px;
+        background: #fafafa;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+      }
+
+      pre {
+        margin: 0;
+        padding: 12px;
+        border-radius: 8px;
+        background: #111;
+        color: #f3f3f3;
+        overflow: auto;
+      }
+
+      @media (max-width: 760px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>HTML Forms: Labels, Uploads, Validation, Constraints</h1>
+      <p>
+        Open the Console to see logs. Try submitting with empty fields to see
+        built-in validation.
+      </p>
+    </header>
+
+    <main>
+      <section aria-labelledby="labels-inputs-title">
+        <h2 id="labels-inputs-title">1) Labels and Inputs</h2>
+
+        <!--
+          Key idea:
+          A <label> describes an input.
+
+          Accessibility benefit:
+          - Clicking the label focuses the input.
+          - Screen readers can announce the label for the input.
+
+          How to connect them:
+          - Give the input an id="..."
+          - Give the label a for="same-id"
+
+          Example: label for="email" + input id="email"
+        -->
+
+        <p class="help">
+          In the form below, every input has a matching
+          <code>&lt;label&gt;</code>.
+        </p>
+      </section>
+
+      <section aria-labelledby="uploads-title">
+        <h2 id="uploads-title">2) File Uploads</h2>
+
+        <!--
+          Key idea:
+          File upload is done with: <input type="file">
+
+          Common useful attributes:
+          - accept="image/*" or accept=".pdf"
+          - multiple (lets the user select more than one file)
+
+          IMPORTANT:
+          - Uploading requires a server to actually store the file.
+          - We will just read file metadata in JavaScript (name, size, type).
+        -->
+
+        <p class="help">
+          Pick a file and submit. We’ll show the file info below.
+        </p>
+      </section>
+
+      <section aria-labelledby="validation-title">
+        <h2 id="validation-title">3) Form Validation</h2>
+
+        <!--
+          Key idea:
+          HTML has built-in validation. The browser checks constraints BEFORE submitting.
+
+          Examples:
+          - required
+          - type="email" (checks for valid email-like format)
+          - minlength / maxlength
+          - min / max (for numbers and dates)
+          - pattern (regular-expression-like rule)
+
+          We also show how to check validity with JavaScript:
+          - form.checkValidity()
+          - input.validity
+          - input.validationMessage
+        -->
+
+        <p class="help">
+          Try typing an invalid email, or a short password, then submit.
+        </p>
+      </section>
+
+      <section aria-labelledby="constraints-title">
+        <h2 id="constraints-title">4) HTML Form Constraints</h2>
+
+        <!--
+          Key idea:
+          Constraints are rules you place on fields using HTML attributes.
+
+          We'll demonstrate constraints directly in the form fields below.
+        -->
+
+        <form id="demo-form">
+          <!--
+            IMPORTANT:
+            We set novalidate so the browser doesn't block submit.
+            That way we can show BOTH:
+            - How validation works (via JS calling checkValidity)
+            - And still keep the page from navigating away
+
+            In real projects, you might remove novalidate to use the browser UI.
+          -->
+
+          <div class="grid-2">
+            <div class="field">
+              <!-- Step 1: Label connected to input via for/id -->
+              <label for="full-name">Full Name (required)</label>
+              <input
+                id="full-name"
+                name="fullName"
+                type="text"
+                required
+                minlength="2"
+                maxlength="40"
+                placeholder="e.g., Juan Dela Cruz"
+                autocomplete="name"
+              />
+              <p class="help">
+                Constraints: <code>required</code>, <code>minlength</code>,
+                <code>maxlength</code>
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="email">Email (required)</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="e.g., student@example.com"
+                autocomplete="email"
+              />
+              <p class="help">
+                Constraint: <code>type="email"</code> + <code>required</code>
+              </p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="age">Age (number constraints)</label>
+              <input
+                id="age"
+                name="age"
+                type="number"
+                min="13"
+                max="99"
+                step="1"
+                placeholder="13 to 99"
+              />
+              <p class="help">
+                Constraints: <code>min</code>, <code>max</code>,
+                <code>step</code>
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="birthdate">Birthdate (date constraints)</label>
+              <input
+                id="birthdate"
+                name="birthdate"
+                type="date"
+                min="1900-01-01"
+                max="2026-12-31"
+              />
+              <p class="help">
+                Constraints: <code>min</code>, <code>max</code> (dates)
+              </p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="password">Password (required)</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                minlength="8"
+                placeholder="At least 8 characters"
+                autocomplete="new-password"
+              />
+              <p class="help">Constraint: <code>minlength="8"</code></p>
+            </div>
+
+            <div class="field">
+              <label for="student-id">Student ID (pattern constraint)</label>
+              <input
+                id="student-id"
+                name="studentId"
+                type="text"
+                pattern="[A-Z]{2}-[0-9]{4}"
+                placeholder="Format: AB-1234"
+              />
+              <p class="help">
+                Constraint: <code>pattern="[A-Z]{2}-[0-9]{4}"</code>
+              </p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="profile-photo">Profile Photo (file upload)</label>
+            <input
+              id="profile-photo"
+              name="profilePhoto"
+              type="file"
+              accept="image/*"
+            />
+            <p class="help">
+              File input: <code>type="file"</code> +
+              <code>accept="image/*"</code>
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="message">Message (optional textarea)</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              maxlength="200"
+              placeholder="Write up to 200 characters..."
+            ></textarea>
+            <p class="help">Constraint: <code>maxlength="200"</code></p>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Submit (demo)</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+        </form>
+
+        <div class="result" aria-live="polite" style="margin-top: 14px">
+          <h3 style="margin-top: 0">Submission Result</h3>
+          <p class="help" style="margin-top: 0">
+            We will print validation messages and collected values here.
+          </p>
+          <pre id="result-output">(nothing submitted yet)</pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="help">
+        Tip: Remove <code>novalidate</code> from the form to see the browser’s
+        built-in validation UI.
+      </p>
+    </footer>
+
+    <script>
+      // Step 1: Select the form and output element.
+      const demoForm = document.querySelector("#demo-form");
+      const resultOutput = document.querySelector("#result-output");
+
+      // Step 2: Helper function to show messages on the page.
+      function printResult(text) {
+        resultOutput.textContent = text;
+      }
+
+      // Step 3: Turn form data into a simple object for display.
+      function getFormDataObject(formElement) {
+        const formData = new FormData(formElement);
+        const formValues = {};
+
+        // FormData entries include text inputs AND files.
+        for (const [key, value] of formData.entries()) {
+          // If the value is a File, show metadata instead of the whole file.
+          if (value instanceof File) {
+            formValues[key] = value.name
+              ? { name: value.name, type: value.type, sizeBytes: value.size }
+              : null;
+          } else {
+            formValues[key] = value;
+          }
+        }
+
+        return formValues;
+      }
+
+      // Step 4: Show a readable summary of invalid fields.
+      function getValidationSummary(formElement) {
+        const allControls = Array.from(formElement.elements);
+
+        // Filter to elements that actually have validation (inputs, textareas, selects)
+        const validatableControls = allControls.filter((control) => {
+          return (
+            control instanceof HTMLInputElement ||
+            control instanceof HTMLTextAreaElement ||
+            control instanceof HTMLSelectElement
+          );
+        });
+
+        const invalidControls = validatableControls.filter(
+          (control) => !control.checkValidity(),
+        );
+
+        // If everything is valid, return an empty string.
+        if (invalidControls.length === 0) {
+          return "";
+        }
+
+        // Build a simple summary for students.
+        const lines = invalidControls.map((control) => {
+          const controlName = control.name || control.id || "(unnamed control)";
+          return `- ${controlName}: ${control.validationMessage}`;
+        });
+
+        return ["Validation failed for these fields:", ...lines].join("\n");
+      }
+
+      // Step 5: Handle submit.
+      demoForm.addEventListener("submit", (event) => {
+        // Prevent real navigation / submission because this is a teaching demo.
+        event.preventDefault();
+
+        console.log("--- Form Submit Attempt ---");
+
+        // Ask the browser to evaluate all constraints.
+        const isValid = demoForm.checkValidity();
+        console.log("Form valid?", isValid);
+
+        const validationSummary = getValidationSummary(demoForm);
+
+        // Collect the form data.
+        const formValues = getFormDataObject(demoForm);
+        console.log("Collected form values:", formValues);
+
+        // Print results for the student.
+        if (!isValid) {
+          printResult(
+            `${validationSummary}\n\nCollected Values (may be incomplete):\n${JSON.stringify(formValues, null, 2)}`,
+          );
+          return;
+        }
+
+        printResult(
+          `Validation passed!\n\nCollected Values:\n${JSON.stringify(formValues, null, 2)}`,
+        );
+      });
+
+      // Step 6: Optional: show file info immediately when a file is chosen.
+      const profilePhotoInput = document.querySelector("#profile-photo");
+      profilePhotoInput.addEventListener("change", () => {
+        const file = profilePhotoInput.files && profilePhotoInput.files[0];
+        if (!file) {
+          console.log("No file selected.");
+          return;
+        }
+
+        console.log("Selected file:", {
+          name: file.name,
+          type: file.type,
+          sizeBytes: file.size,
+        });
+      });
+
+      // Step 7: Friendly starter message.
+      console.log(
+        "Tip: Try submitting empty fields to see constraint messages.",
+      );
+      console.log("Tip: Try Student ID like AB-1234 to satisfy the pattern.");
+    </script>
+  </body>
+</html>

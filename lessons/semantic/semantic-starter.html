@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic Layout Tags (Starter)</title>
+
+    <!--
+      STARTER VERSION (HTML-ONLY)
+      --------------------------
+      Goal: Practice semantic layout tags using only HTML.
+
+      Rules for this starter file:
+      - No CSS (<style>) and no JavaScript (<script>)
+      - Use semantic HTML and clear comments
+      - Keep examples short and focused
+
+      Tags covered:
+      - <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>
+
+      Reminder:
+      - Semantic tags add MEANING (structure), not automatic styling.
+    -->
+  </head>
+
+  <body>
+    <!-- ==========================================================
+         <header>
+         ========================================================== -->
+    <header>
+      <!--
+        Use <header> for:
+        - page title
+        - intro text
+        - logo
+        - sometimes navigation (but navigation can also be separate)
+      -->
+      <h1>Semantic Layout Tags (Starter)</h1>
+      <p>
+        This page is built with semantic tags: <strong>header</strong>,
+        <strong>nav</strong>, <strong>main</strong>, <strong>section</strong>,
+        <strong>article</strong>, <strong>aside</strong>, and <strong>footer</strong>.
+      </p>
+    </header>
+
+    <!-- ==========================================================
+         <nav>
+         ========================================================== -->
+    <nav aria-label="Primary">
+      <!--
+        Use <nav> for your main navigation links.
+        - Put important site/page links here.
+        - Use clear link text.
+      -->
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#sidebar">Sidebar</a></li>
+      </ul>
+    </nav>
+
+    <!-- ==========================================================
+         <main>
+         ========================================================== -->
+    <main>
+      <!--
+        Use <main> for the MAIN unique content of the page.
+        Best practice:
+        - Usually only ONE <main> per page.
+      -->
+
+      <!-- ========================================================
+           <section>
+           ======================================================== -->
+      <section id="about" aria-labelledby="about-title">
+        <!--
+          Use <section> for a themed group of content.
+          A section should usually have a heading.
+        -->
+        <h2 id="about-title">About this page</h2>
+        <p>
+          This section explains what semantic layout tags are.
+          They help organize your content so it makes sense to humans and to
+          assistive technologies.
+        </p>
+      </section>
+
+      <!-- ========================================================
+           <article>
+           ======================================================== -->
+      <section id="news" aria-labelledby="news-title">
+        <h2 id="news-title">News</h2>
+
+        <!--
+          Use <article> for content that can stand alone.
+          Examples:
+          - blog post
+          - product card
+          - news story
+        -->
+        <article aria-labelledby="post-title">
+          <h3 id="post-title">A sample article</h3>
+          <p>
+            This is an article. Imagine it as a blog post or a news update.
+          </p>
+          <p>
+            If you copied this article into another page, it would still make
+            sense by itself.
+          </p>
+        </article>
+      </section>
+
+      <!-- ========================================================
+           <aside>
+           ======================================================== -->
+      <aside id="sidebar" aria-labelledby="aside-title">
+        <!--
+          Use <aside> for related content.
+          This is often a sidebar, a note, or extra links.
+        -->
+        <h2 id="aside-title">Sidebar (Aside)</h2>
+        <ul>
+          <li>Tip: A <code>&lt;section&gt;</code> groups a topic.</li>
+          <li>Tip: An <code>&lt;article&gt;</code> stands alone.</li>
+          <li>Tip: An <code>&lt;aside&gt;</code> is related, not central.</li>
+        </ul>
+      </aside>
+    </main>
+
+    <!-- ==========================================================
+         <footer>
+         ========================================================== -->
+    <footer>
+      <!--
+        Use <footer> for footer information.
+        Examples:
+        - copyright
+        - contact info
+        - links to policies
+      -->
+      <p>© 2026 Semantic Tags Practice</p>
+    </footer>
+  </body>
+</html>

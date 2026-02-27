@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedding Media: Images, Audio, Video, iframe, CSP basics</title>
+
+    <!--
+      LESSON: Embedding Media in HTML
+
+      Goal:
+      - Understand how to embed and display:
+        1) Images (<img>)
+        2) Audio (<audio>)
+        3) Video (<video>)
+        4) External pages/widgets (<iframe>)
+      - Learn key attributes (alt, controls, autoplay rules, loading)
+      - Understand what CSP is and why it can block embeds
+
+      Notes for students:
+      - This page uses online demo media (requires internet).
+      - Open DevTools Console to see the JavaScript logs.
+
+      We keep HTML, CSS, and JS in distinct sections.
+    -->
+
+    <style>
+      /* Step 1: Basic readability styles (matches other lessons) */
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        line-height: 1.5;
+        margin: 0;
+        padding: 24px;
+      }
+
+      header,
+      main,
+      footer {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 18px;
+      }
+
+      section {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .box {
+        border: 1px dashed #aaa;
+        border-radius: 10px;
+        padding: 12px;
+        background: #fafafa;
+      }
+
+      figure {
+        margin: 0;
+        display: grid;
+        gap: 8px;
+      }
+
+      figcaption {
+        color: #333;
+        font-size: 0.95rem;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        display: block;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+      }
+
+      pre {
+        margin: 0;
+        padding: 12px;
+        border-radius: 10px;
+        background: #111;
+        color: #f3f3f3;
+        overflow: auto;
+      }
+
+      .help {
+        margin: 0;
+        color: #333;
+        font-size: 0.95rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      button {
+        font: inherit;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid #111;
+        background: #111;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #fff;
+        color: #111;
+      }
+
+      /* Step 2: Make iframes responsive using an aspect-ratio wrapper */
+      .embed-frame {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .embed-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+
+      .ratio-16x9 {
+        aspect-ratio: 16 / 9;
+      }
+
+      .ratio-1x1 {
+        aspect-ratio: 1 / 1;
+      }
+
+      @media (max-width: 800px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Embedding Media</h1>
+      <p class="help">
+        This lesson covers <code>&lt;img&gt;</code>, <code>&lt;audio&gt;</code>,
+        <code>&lt;video&gt;</code>, <code>&lt;iframe&gt;</code>, and a
+        beginner-friendly intro to CSP.
+      </p>
+    </header>
+
+    <main>
+      <section aria-labelledby="images-title">
+        <h2 id="images-title">1) Images: <code>&lt;img&gt;</code></h2>
+
+        <!--
+          Key idea:
+          - <img> embeds an image into the page.
+
+          IMPORTANT:
+          - <img> does NOT have a closing tag.
+
+          Accessibility:
+          - Always add alt="...".
+          - alt text describes the image for screen readers and for cases
+            where the image cannot load.
+
+          Performance:
+          - loading="lazy" helps delay images until they are needed.
+          - width/height helps prevent layout shifting.
+        -->
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>Rendered image</h3>
+
+            <figure>
+              <img
+                src="https://picsum.photos/id/1069/900/500"
+                alt="A landscape photo with water and mountains"
+                width="900"
+                height="500"
+                loading="lazy"
+              />
+              <figcaption>
+                This image is loaded from a public placeholder service (requires
+                internet).
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="box">
+            <h3>What the HTML looks like</h3>
+            <pre>
+&lt;img
+  src="https://picsum.photos/id/1069/900/500"
+  alt="A landscape photo with water and mountains"
+  width="900"
+  height="500"
+  loading="lazy"
+/&gt;</pre
+            >
+            <p class="help">
+              Try breaking the URL to see how <code>alt</code> still helps.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="audio-title">
+        <h2 id="audio-title">2) Audio: <code>&lt;audio&gt;</code></h2>
+
+        <!--
+          Key idea:
+          - <audio> embeds sound.
+
+          Common attributes:
+          - controls (shows play/pause UI)
+          - loop
+          - muted
+          - autoplay (often blocked unless muted and/or user interacted)
+          - preload="metadata" (loads only duration info, not full audio)
+
+          TIP:
+          - Provide fallback text inside <audio> for older browsers.
+        -->
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>Audio player</h3>
+            <audio id="demo-audio" controls preload="metadata">
+              <source
+                src="https://www.w3schools.com/html/horse.mp3"
+                type="audio/mpeg"
+              />
+              Your browser does not support the audio element.
+            </audio>
+
+            <p class="help">Try clicking play. Watch the Console for logs.</p>
+          </div>
+
+          <div class="box">
+            <h3>Useful attributes to try</h3>
+            <pre>
+&lt;audio controls preload="metadata"&gt;
+  &lt;source src="..." type="audio/mpeg" /&gt;
+  Fallback text...
+&lt;/audio&gt;
+
+&lt;!-- Try these too: loop, muted --&gt;</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="video-title">
+        <h2 id="video-title">3) Video: <code>&lt;video&gt;</code></h2>
+
+        <!--
+          Key idea:
+          - <video> embeds video.
+
+          Common attributes:
+          - controls
+          - poster (shows an image before playing)
+          - muted (often required for autoplay)
+          - playsinline (useful on mobile)
+          - preload="metadata"
+
+          NOTE:
+          - Autoplay is usually blocked unless the video is muted.
+        -->
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>Video player</h3>
+
+            <video
+              id="demo-video"
+              controls
+              preload="metadata"
+              playsinline
+              width="640"
+            >
+              <source
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video element.
+            </video>
+
+            <p class="help">Tip: Try play/pause and check the Console logs.</p>
+          </div>
+
+          <div class="box">
+            <h3>Common patterns</h3>
+            <pre>
+&lt;video controls preload="metadata" playsinline&gt;
+  &lt;source src="video.mp4" type="video/mp4" /&gt;
+  Fallback text...
+&lt;/video&gt;
+
+&lt;!-- You can add: poster="preview.jpg" --&gt;</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="iframe-title">
+        <h2 id="iframe-title">4) iFrame: <code>&lt;iframe&gt;</code></h2>
+
+        <!--
+          Key idea:
+          - <iframe> embeds another HTML page inside your page.
+
+          Common uses:
+          - Maps
+          - Videos
+          - Widgets
+
+          IMPORTANT:
+          - Some websites block being embedded in an iframe for security reasons.
+
+          Accessibility:
+          - Always include a title="..." describing the iframe content.
+
+          Security:
+          - sandbox can limit what the embedded page can do.
+            (We show a safe sandbox example below.)
+        -->
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>Map embed (OpenStreetMap)</h3>
+
+            <div class="embed-frame ratio-1x1">
+              <iframe
+                title="Embedded OpenStreetMap view"
+                loading="lazy"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=120.971%2C14.571%2C120.986%2C14.583&amp;layer=mapnik"
+                sandbox="allow-scripts allow-same-origin allow-popups"
+              ></iframe>
+            </div>
+
+            <p class="help">
+              If it doesn’t show, your network may be blocking external embeds.
+            </p>
+          </div>
+
+          <div class="box">
+            <h3>YouTube embed (example)</h3>
+
+            <div class="embed-frame ratio-16x9">
+              <iframe
+                title="YouTube video embed"
+                loading="lazy"
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <p class="help">
+              We used <code>youtube-nocookie.com</code> to reduce tracking in
+              this demo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="csp-title">
+        <h2 id="csp-title">5) CSP Basics (Content Security Policy)</h2>
+
+        <!--
+          Key idea:
+          CSP is a browser security rule that acts like a "permission list" for a web page.
+
+          Simple analogy:
+          - Imagine your website is a school event.
+          - The browser is the security guard at the entrance.
+          - CSP is the guest list.
+          - If a resource (image/video/iframe/script) is NOT on the guest list,
+            the guard blocks it — even if your HTML tries to load it.
+
+          Why it matters for embedding media:
+          - If your site uses a strict CSP, your <img>, <audio>, <video>, or <iframe>
+            might fail to load.
+
+          IMPORTANT:
+          - Real CSP is usually sent by the SERVER as an HTTP response header.
+          - When you open a plain .html file locally, you are not truly configuring
+            server headers.
+
+          We show an example CSP below as a COMMENT so it does not break this demo.
+        -->
+
+        <p class="help">
+          If an embed fails, check your Console. CSP and iframe restrictions
+          often show up there.
+        </p>
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>What CSP controls (in plain words)</h3>
+            <p class="help">
+              CSP is an <strong>allowlist</strong>. It answers questions like:
+              “Are we allowed to load images from this domain?” “Are we allowed
+              to embed that website inside an iframe?”
+            </p>
+            <p class="help">
+              When CSP blocks something, the page usually still loads — but that
+              one resource is refused.
+            </p>
+          </div>
+
+          <div class="box">
+            <h3>Common CSP directives you’ll see</h3>
+            <ul>
+              <li>
+                <code>default-src</code>: the default rule for most resource
+                types
+              </li>
+              <li><code>img-src</code>: where images can load from</li>
+              <li><code>media-src</code>: where audio/video can load from</li>
+              <li>
+                <code>frame-src</code>: which sites can be embedded in iframes
+              </li>
+              <li><code>script-src</code>: where JavaScript can load from</li>
+              <li><code>style-src</code>: where CSS can load from</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box" aria-label="CSP example">
+          <h3>Example (commented out)</h3>
+          <pre>
+&lt;!--
+&lt;meta http-equiv="Content-Security-Policy"
+  content="default-src 'self';
+           img-src 'self' https: data:;
+           media-src 'self' https:;
+           frame-src https://www.openstreetmap.org https://www.youtube-nocookie.com;" /&gt;
+--&gt;</pre
+          >
+          <p class="help">
+            In real sites, this is typically an HTTP header, not a meta tag.
+          </p>
+          <p class="help">
+            Tiny decoding tip: <code>'self'</code> means “this same
+            website/domain”. The word <code>https:</code> means “any HTTPS
+            site”. And a domain like
+            <code>https://www.youtube-nocookie.com</code> means “only that
+            specific site is allowed.”
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="practice-title">
+        <h2 id="practice-title">Practice tasks</h2>
+
+        <!--
+          These tasks help students apply what they learned.
+          (No extra pages or fancy features — just clear steps.)
+        -->
+
+        <ol>
+          <li>
+            Change the <code>alt</code> text of the image so it describes what
+            you see.
+          </li>
+          <li>
+            Replace the image <code>src</code> with another public image URL.
+          </li>
+          <li>Add <code>loop</code> to the audio tag, then test it.</li>
+          <li>
+            Add a <code>poster</code> attribute to the video (use any image
+            URL).
+          </li>
+          <li>
+            Replace the YouTube embed <code>src</code> with another YouTube
+            embed link.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p class="help">
+        Tip: If something doesn’t load, check the Console and your network
+        settings.
+      </p>
+    </footer>
+
+    <script>
+      // Step 1: Grab the media elements
+      const audioElement = document.querySelector("#demo-audio");
+      const videoElement = document.querySelector("#demo-video");
+
+      // Step 2: Helper to log media events
+      function logMediaEvent(label, eventName, media) {
+        // We keep logs beginner-friendly and descriptive
+        console.log(`[${label}] event: ${eventName}`, {
+          currentTime: media.currentTime,
+          paused: media.paused,
+          duration: Number.isFinite(media.duration) ? media.duration : null,
+        });
+      }
+
+      // Step 3: Listen to a few common events
+      const commonEvents = [
+        "play",
+        "pause",
+        "ended",
+        "loadedmetadata",
+        "timeupdate",
+      ];
+
+      for (const eventName of commonEvents) {
+        audioElement.addEventListener(eventName, () => {
+          logMediaEvent("AUDIO", eventName, audioElement);
+        });
+
+        videoElement.addEventListener(eventName, () => {
+          logMediaEvent("VIDEO", eventName, videoElement);
+        });
+      }
+    </script>
+  </body>
+</html>
